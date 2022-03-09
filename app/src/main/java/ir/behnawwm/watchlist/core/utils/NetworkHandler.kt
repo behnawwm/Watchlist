@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.core.platform
+package ir.behnawwm.watchlist.core.utils
 
 import android.content.Context
 import android.net.NetworkCapabilities
