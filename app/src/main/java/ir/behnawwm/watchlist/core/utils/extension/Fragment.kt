@@ -4,8 +4,8 @@ import android.content.Context
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.fernandocejas.sample.core.platform.BaseActivity
-import com.fernandocejas.sample.core.platform.BaseFragment
+import ir.behnawwm.watchlist.core.platform.BaseActivity
+import ir.behnawwm.watchlist.core.platform.BaseFragment
 
 inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) =
     beginTransaction().func().commit()
