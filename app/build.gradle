@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-kapt'
     id "androidx.navigation.safeargs.kotlin"
     id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -21,6 +22,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
     buildTypes {
         release {
@@ -76,10 +78,10 @@ dependencies {
 
 
     //Room
-//    implementation "androidx.room:room-runtime:2.4.2"
-//    kapt "androidx.room:room-compiler:2.4.2"
-//    annotationProcessor "androidx.room:room-compiler:2.4.2"
-//    implementation "androidx.room:room-ktx:2.4.2"
+    implementation "androidx.room:room-runtime:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
+    annotationProcessor "androidx.room:room-compiler:2.4.2"
+    implementation "androidx.room:room-ktx:2.4.2"
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -92,10 +94,6 @@ dependencies {
     kapt 'com.google.dagger:hilt-compiler:2.40.5'
 
     //Coil
-//    implementation 'io.coil-kt:coil:2.0.0-rc01'
-
-    //Glide     todo migrate to coil
-    implementation 'com.github.bumptech.glide:glide:4.13.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+    implementation 'io.coil-kt:coil:2.0.0-rc01'
 
 }

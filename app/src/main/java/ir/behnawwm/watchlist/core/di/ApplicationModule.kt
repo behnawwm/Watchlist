@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ir.behnawwm.watchlist.BuildConfig
 import ir.behnawwm.watchlist.core.constants.GeneralConstants
+import ir.behnawwm.watchlist.features.data.repository.MoviesRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -37,5 +38,7 @@ class ApplicationModule {
     }
 
 
-    //todo move repos here
+    @Provides
+    @Singleton
+    fun provideMoviesRepository(dataSource: MoviesRepository.Network): MoviesRepository = dataSource
 }

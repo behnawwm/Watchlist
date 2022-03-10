@@ -5,6 +5,8 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.33106884057971014" />
+        <entry key="app/src/main/res/layout/fragment_movie_details.xml" value="0.33106884057971014" />
+        <entry key="app/src/main/res/layout/fragment_movie_list.xml" value="1.2023026315789473" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.33106884057971014" />
       </map>
     </option>

@@ -1,4 +1,4 @@
-package ir.behnawwm.watchlist.features.login
+package ir.behnawwm.watchlist.features.presentation.login
 
 import javax.inject.Inject
 import javax.inject.Singleton
