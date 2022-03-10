@@ -4,22 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import ir.behnawwm.watchlist.R
+import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.utils.extension.failure
 import ir.behnawwm.watchlist.core.utils.extension.observe
 import ir.behnawwm.watchlist.databinding.FragmentMovieListBinding
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MovieListFragment : Fragment() {
     private lateinit var binding: FragmentMovieListBinding
-    private val viewModel : MovieListViewModel by viewModels()
+    private val viewModel: MovieListViewModel by viewModels()
 
-//    lateinit var moviesAdapter: MoviesAdapter
+    private lateinit var moviesAdapter: FastItemAdapter<MovieListItem>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,55 +30,56 @@ class MovieListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMovieListBinding.inflate(layoutInflater)
-
-//        with(viewModel) {
-//            observe(movies, ::renderMoviesList)
-//            failure(failure, ::handleFailure)
-//        }
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        initializeView()
-//        loadMoviesList()
+        initializeView()
+        loadMoviesList()
+
+        with(viewModel) {
+            observe(movies, ::renderMoviesList)
+            failure(failure, ::handleFailure)
+        }
+
     }
 
-//    private fun initializeView() {
-//        movieList.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
-//        movieList.adapter = moviesAdapter
-//        moviesAdapter.clickListener = { movie, navigationExtras ->
-//            navigator.showMovieDetails(requireActivity(), movie, navigationExtras)
-//        }
-//    }
-//
-//    private fun loadMoviesList() {
+    private fun initializeView() {
+        binding.rvMovies.apply {
+            layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+            adapter = moviesAdapter
+            //todo click listener
+        }
+    }
+
+    private fun loadMoviesList() {
 //        emptyView.invisible()
 //        movieList.visible()
 //        showProgress()
-//        moviesViewModel.loadMovies()
-//    }
-//
-//    private fun renderMoviesList(movies: List<MovieView>?) {
-//        moviesAdapter.collection = movies.orEmpty()
+        viewModel.loadMovies()
+    }
+
+    private fun renderMoviesList(movies: List<MovieView>?) {
+        moviesAdapter.set(movies.orEmpty().map { it.toMovieListItem() })
 //        hideProgress()
-//    }
-//
-//    private fun handleFailure(failure: Failure?) {
-//        when (failure) {
-//            is NetworkConnection -> renderFailure(R.string.failure_network_connection)
-//            is ServerError -> renderFailure(R.string.failure_server_error)
-//            is ListNotAvailable -> renderFailure(R.string.failure_movies_list_unavailable)
+    }
+
+    private fun handleFailure(failure: Failure?) {
+        when (failure) {
+//            is Failure.NetworkConnection -> renderFailure(R.string.failure_network_connection)
+//            is Failure.ServerError -> renderFailure(R.string.failure_server_error)
+//            is MovieFailure.ListNotAvailable -> renderFailure(R.string.failure_movies_list_unavailable)
 //            else -> renderFailure(R.string.failure_server_error)
-//        }
-//    }
-//
-//    private fun renderFailure(@StringRes message: Int) {
+        }
+    }
+
+    private fun renderFailure(@StringRes message: Int) {
+        Toast.makeText(requireContext(), "$message", Toast.LENGTH_SHORT).show()
 //        movieList.invisible()
 //        emptyView.visible()
 //        hideProgress()
 //        notifyWithAction(message, R.string.action_refresh, ::loadMoviesList)
-//    }
+    }
 }

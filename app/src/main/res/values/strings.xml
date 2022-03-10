@@ -2,4 +2,9 @@
     <string name="app_name">WatchList</string>
     <string name="login_screen_title">Login</string>
     <string name="movies_screen_title">Movies</string>
+
+
+
+    <!-- Animations -->
+    <string name="movie_transition_poster">moviePosterTransition</string>
 </resources>

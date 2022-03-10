@@ -9,4 +9,6 @@ data class MovieView(
     val poster: String,
 ) : Parcelable {
 
+
+    fun toMovieListItem() = MovieListItem(this)
 }
