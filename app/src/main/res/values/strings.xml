@@ -14,4 +14,7 @@
 
     <!-- Animations -->
     <string name="movie_transition_poster">moviePosterTransition</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="saves">Saved</string>
 </resources>

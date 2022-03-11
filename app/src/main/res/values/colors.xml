@@ -10,11 +10,15 @@
 
 
     <!--Base colors-->
-    <color name="colorPrimary">#000000</color>
-    <color name="colorAccent">#000000</color>
-    <color name="colorSecondary">#7f1a18</color>
-    <color name="colorTextPrimary">#FFFFFF</color>
-    <color name="colorTextSecondary">#7f1a18</color>
+    <color name="black_light">#424242</color>
+    <color name="yellow">#FFC700</color>
+    <color name="dark_red">#7f1a18</color>
+
+    <color name="colorTextPrimary">@color/white</color>
+    <color name="colorTextSecondary">@color/dark_red</color>
+    <color name="colorPrimary">@color/black</color>
+    <color name="colorSecondary">@color/yellow</color>
+
 
     <color name="translucentBackground">#ED000000</color>
 </resources>

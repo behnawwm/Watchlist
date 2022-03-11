@@ -30,7 +30,7 @@ fun Fragment.showProgress() = progressStatus(View.VISIBLE)
 fun Fragment.hideProgress() = progressStatus(View.GONE)
 
 private fun Fragment.progressStatus(viewStatus: Int) =      //todo change
-    with(activity) { if (this is MainActivity) this.binding.toolbar.progress.visibility = viewStatus }
+    with(activity) { if (this is MainActivity) this.binding.progressBar.visibility = viewStatus }
 
 fun Fragment.notifyWithAction(
     @StringRes message: Int,
