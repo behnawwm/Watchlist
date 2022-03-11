@@ -37,6 +37,7 @@
         <item name="android:textColorPrimary">@color/colorTextSecondary</item>
         <item name="android:textColorSecondary">@color/colorTextPrimary</item>
     </style>
+
     <style name="CustomTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textSize">22sp</item>
@@ -49,6 +50,24 @@
         <item name="android:scaleType">centerCrop</item>
         <item name="android:transitionName">@string/movie_transition_poster</item>
         <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <!--    Text styles -->
+    <style name="MovieDetailsTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingLeft">20dp</item>
+    </style>
+
+    <style name="MovieDetailsText" parent="MovieDetailsTitle">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:paddingBottom">25dp</item>
+        <item name="android:freezesText">true</item>
     </style>
 
 </resources>

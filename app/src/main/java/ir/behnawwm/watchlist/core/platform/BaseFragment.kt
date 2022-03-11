@@ -16,17 +16,17 @@ import ir.behnawwm.watchlist.R
  *
  * @see Fragment
  */
-@AndroidEntryPoint
-abstract class BaseFragment : Fragment() {
-
-    abstract fun layoutId(): Int
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View =
-        inflater.inflate(layoutId(), container, false)
+//@AndroidEntryPoint
+//abstract class BaseFragment : Fragment() {
+//
+//    abstract fun layoutId(): Int
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View =
+//        inflater.inflate(layoutId(), container, false)
 
 //    open fun onBackPressed() {}
 //
@@ -52,4 +52,4 @@ abstract class BaseFragment : Fragment() {
 //        snackBar.setActionTextColor(ContextCompat.getColor(appContext, R.color.colorTextPrimary))
 //        snackBar.show()
 //    }
-}
+//}

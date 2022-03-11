@@ -13,8 +13,8 @@ import ir.behnawwm.watchlist.databinding.ActivityMainBinding
  *
  * @see AppCompatActivity
  */
-@AndroidEntryPoint
-abstract class BaseActivity : AppCompatActivity() {
+//@AndroidEntryPoint
+//abstract class BaseActivity : AppCompatActivity() {
 //    lateinit var binding:ActivityMainBinding
 //
 //    override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,4 +29,4 @@ abstract class BaseActivity : AppCompatActivity() {
 //        super.onBackPressed()
 //    }
 
-}
+//}

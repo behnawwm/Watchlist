@@ -3,7 +3,14 @@
     <string name="login_screen_title">Login</string>
     <string name="movies_screen_title">Movies</string>
 
+    <!-- Failure -->
+    <string name="failure_network_connection">No Network Connection.</string>
+    <string name="failure_server_error">Server Error</string>
+    <string name="failure_movies_list_unavailable">Movies Unavailable.</string>
+    <string name="failure_movie_non_existent">Movie Not Existent.</string>
 
+    <!-- Actions -->
+    <string name="action_refresh">Refresh</string>
 
     <!-- Animations -->
     <string name="movie_transition_poster">moviePosterTransition</string>

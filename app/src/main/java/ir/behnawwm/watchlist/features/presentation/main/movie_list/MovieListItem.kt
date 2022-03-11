@@ -14,7 +14,7 @@ import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.databinding.ItemMovieBinding
 
 class MovieListItem(
-    private val movie: MovieView
+    val movie: MovieView
 ) : AbstractBindingItem<ItemMovieBinding>() {
     override val type: Int
         get() = R.id.fastadapter_movie_list
