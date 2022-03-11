@@ -5,18 +5,15 @@ import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.functional.Either
 import ir.behnawwm.watchlist.core.utils.NetworkHandler
 import ir.behnawwm.watchlist.features.data.remote.api_service.MoviesService
-import ir.behnawwm.watchlist.features.data.remote.dto.Movie
-import ir.behnawwm.watchlist.features.data.remote.dto.MovieDetails
-import ir.behnawwm.watchlist.features.data.remote.dto.MovieDetailsEntity
-import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.PopularMovie
-import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.Result
+import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.MovieDetails
+import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.TmdbPageResult
 import retrofit2.Call
 import javax.inject.Inject
 
 interface MoviesRepository {
-    fun movies(): Either<Failure, List<Movie>>
+    //    fun movies(): Either<Failure, List<Movie>>
     fun movieDetails(movieId: Int): Either<Failure, MovieDetails>
-    fun popularMovies(): Either<Failure, List<Movie>>
+    fun popularMovies(): Either<Failure, TmdbPageResult>
 
     class Network
     @Inject constructor(
@@ -24,34 +21,23 @@ interface MoviesRepository {
         private val service: MoviesService
     ) : MoviesRepository {
 
-        override fun movies(): Either<Failure, List<Movie>> {
-            return when (networkHandler.isNetworkAvailable()) {
-                true -> request(
-                    service.movies(),
-                    { it.map { movieEntity -> movieEntity.toMovie() } },
-                    emptyList()
-                )
-                false -> Either.Left(Failure.NetworkConnection)
-            }
-        }
-
         override fun movieDetails(movieId: Int): Either<Failure, MovieDetails> {
             return when (networkHandler.isNetworkAvailable()) {
                 true -> request(
-                    service.movieDetails(movieId),
-                    { it.toMovieDetails() },
-                    MovieDetailsEntity.empty
+                    service.movieDetails(movieId,GeneralConstants.TMDB_TOKEN),
+                    { it },
+                    MovieDetails.empty
                 )
                 false -> Either.Left(Failure.NetworkConnection)
             }
         }
 
-        override fun popularMovies(): Either<Failure, List<Movie>> {
+        override fun popularMovies(): Either<Failure, TmdbPageResult> {
             return when (networkHandler.isNetworkAvailable()) {
                 true -> request(
                     service.popularMovies(GeneralConstants.TMDB_TOKEN),
-                    { it.results.map { it.toMovie() } },
-                    PopularMovie.empty
+                    { it },
+                    TmdbPageResult.empty
                 )
                 false -> Either.Left(Failure.NetworkConnection)
             }

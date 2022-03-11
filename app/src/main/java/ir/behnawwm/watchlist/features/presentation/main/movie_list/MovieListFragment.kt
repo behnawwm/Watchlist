@@ -49,7 +49,8 @@ class MovieListFragment : Fragment() {
     private fun initializeView() {
         binding.rvMovies.apply {
             moviesAdapter = FastItemAdapter()
-            layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+//            layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+//            layoutManager = GalleryLayoutManager(GalleryLayoutManager.HORIZONTAL)
             adapter = moviesAdapter
             moviesAdapter.onClickListener = {view,adapter,item,position ->
                 val action = MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.movie.id)
@@ -67,6 +68,7 @@ class MovieListFragment : Fragment() {
 
         showProgress()
         viewModel.loadMovies()
+
     }
 
     private fun renderMoviesList(movies: List<MovieView>?) {

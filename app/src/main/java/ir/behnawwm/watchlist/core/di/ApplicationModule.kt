@@ -42,4 +42,5 @@ class ApplicationModule {
     @Provides
     @Singleton
     fun provideMoviesRepository(dataSource: MoviesRepository.Network): MoviesRepository = dataSource
+
 }

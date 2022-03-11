@@ -95,4 +95,12 @@ dependencies {
     //Coil
     implementation 'io.coil-kt:coil:2.0.0-rc01'
 
+    //TMDB api wrapper
+//    implementation 'app.moviebase:tmdb-api:0.6.3'
+
+    //Gallery Pager LayoutManager
+//    implementation 'github.hellocsl:GalleryLayoutManager:1.0.6'
+//    implementation 'rouchuan.viewpagerlayoutmanager:viewpagerlayoutmanager:2.0.22'
+
+
 }
