@@ -48,6 +48,7 @@ class MovieListFragment : Fragment() {
 
     private fun initializeView() {
         binding.rvMovies.apply {
+            moviesAdapter = FastItemAdapter()
             layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
             adapter = moviesAdapter
             //todo click listener

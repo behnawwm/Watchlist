@@ -10,7 +10,7 @@
     card_view:cardElevation="@dimen/card_elevation">
 
     <ImageView
-        android:id="@+id/moviePoster"
+        android:id="@+id/ivMoviePoster"
         style="@style/MoviePoster"
         android:layout_height="180dp" />
 

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import coil.load
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
@@ -24,7 +25,7 @@ class MovieListItem(
 
     override fun bindView(binding: ItemMovieBinding, payloads: List<Any>) {
         binding.apply {
-
+            ivMoviePoster.load(movie.poster)
         }
     }
 
