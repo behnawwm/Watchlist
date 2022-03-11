@@ -49,7 +49,7 @@ class MovieListFragment : Fragment() {
     private fun initializeView() {
         binding.rvMovies.apply {
             moviesAdapter = FastItemAdapter()
-            layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = moviesAdapter
             moviesAdapter.onClickListener = {view,adapter,item,position ->
                 val action = MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.movie.id)

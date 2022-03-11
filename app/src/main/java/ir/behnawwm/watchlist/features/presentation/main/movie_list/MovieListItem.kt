@@ -26,6 +26,8 @@ class MovieListItem(
     override fun bindView(binding: ItemMovieBinding, payloads: List<Any>) {
         binding.apply {
             ivMoviePoster.load(movie.poster)
+            tvMovieTitle.text = movie.title
+            tvRating.text = movie.rating.toString()
         }
     }
 

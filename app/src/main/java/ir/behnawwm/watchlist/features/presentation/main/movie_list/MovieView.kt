@@ -7,6 +7,8 @@ import kotlinx.parcelize.Parcelize
 data class MovieView(
     val id: Int,
     val poster: String,
+    val title: String,
+    val rating: Double
 ) : Parcelable {
 
 
