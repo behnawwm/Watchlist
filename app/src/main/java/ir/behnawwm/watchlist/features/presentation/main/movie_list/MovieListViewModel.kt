@@ -8,10 +8,11 @@ import ir.behnawwm.watchlist.core.interactor.UseCase
 import ir.behnawwm.watchlist.core.platform.BaseViewModel
 import ir.behnawwm.watchlist.features.data.remote.dto.Movie
 import ir.behnawwm.watchlist.features.domain.use_case.GetMovies
+import ir.behnawwm.watchlist.features.domain.use_case.GetPopularMovies
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieListViewModel @Inject constructor(private val getMovies: GetMovies) : BaseViewModel() {
+class MovieListViewModel @Inject constructor(private val getMovies: GetPopularMovies) : BaseViewModel() {
 
     private val _movies: MutableLiveData<List<MovieView>> = MutableLiveData()
     val movies: LiveData<List<MovieView>> = _movies

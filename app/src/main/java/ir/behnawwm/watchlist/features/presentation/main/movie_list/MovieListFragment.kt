@@ -84,7 +84,6 @@ class MovieListFragment : Fragment() {
     }
 
     private fun renderFailure(@StringRes message: Int) {
-        Toast.makeText(requireContext(), "$message", Toast.LENGTH_SHORT).show()
         binding.apply {
             rvMovies.invisible()
             ivEmpty.visible()

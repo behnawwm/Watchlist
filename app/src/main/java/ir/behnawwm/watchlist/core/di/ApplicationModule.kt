@@ -21,11 +21,12 @@ class ApplicationModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(GeneralConstants.BASE_URL)
+            .baseUrl(GeneralConstants.BASE_URL_TMDB)
             .client(createClient())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
 
     private fun createClient(): OkHttpClient {
         val okHttpClientBuilder: OkHttpClient.Builder = OkHttpClient.Builder()

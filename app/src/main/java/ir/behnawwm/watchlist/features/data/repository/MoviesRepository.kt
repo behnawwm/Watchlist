@@ -1,5 +1,6 @@
 package ir.behnawwm.watchlist.features.data.repository
 
+import ir.behnawwm.watchlist.core.constants.GeneralConstants
 import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.functional.Either
 import ir.behnawwm.watchlist.core.utils.NetworkHandler
@@ -7,12 +8,15 @@ import ir.behnawwm.watchlist.features.data.remote.api_service.MoviesService
 import ir.behnawwm.watchlist.features.data.remote.dto.Movie
 import ir.behnawwm.watchlist.features.data.remote.dto.MovieDetails
 import ir.behnawwm.watchlist.features.data.remote.dto.MovieDetailsEntity
+import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.PopularMovie
+import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.Result
 import retrofit2.Call
 import javax.inject.Inject
 
 interface MoviesRepository {
     fun movies(): Either<Failure, List<Movie>>
     fun movieDetails(movieId: Int): Either<Failure, MovieDetails>
+    fun popularMovies(): Either<Failure, List<Movie>>
 
     class Network
     @Inject constructor(
@@ -37,6 +41,17 @@ interface MoviesRepository {
                     service.movieDetails(movieId),
                     { it.toMovieDetails() },
                     MovieDetailsEntity.empty
+                )
+                false -> Either.Left(Failure.NetworkConnection)
+            }
+        }
+
+        override fun popularMovies(): Either<Failure, List<Movie>> {
+            return when (networkHandler.isNetworkAvailable()) {
+                true -> request(
+                    service.popularMovies(GeneralConstants.TMDB_TOKEN),
+                    { it.results.map { it.toMovie() } },
+                    PopularMovie.empty
                 )
                 false -> Either.Left(Failure.NetworkConnection)
             }
