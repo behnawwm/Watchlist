@@ -28,6 +28,9 @@ class MovieListItem(
             ivMoviePoster.load(movie.poster)
             tvMovieTitle.text = movie.title
             tvRating.text = movie.rating.toString()
+            ivSave.setOnClickListener {
+                //todo
+            }
         }
     }
 

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/movieListFragment"
         android:enabled="true"
         android:icon="@drawable/color_state_home"
         android:title="@string/home"/>
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/searchFragment"
         android:enabled="true"
         android:icon="@drawable/color_state_search"
         android:title="@string/search"/>
     <item
-        android:id="@+id/page_3"
+        android:id="@+id/savedFragment"
         android:enabled="true"
         android:icon="@drawable/color_state_save"
         android:title="@string/saves"/>

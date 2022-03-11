@@ -16,6 +16,16 @@
         android:padding="4dp">
 
         <ImageView
+            android:id="@+id/ivSave"
+            android:layout_width="wrap_content"
+            android:elevation="4dp"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_save"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
             android:id="@+id/ivMoviePoster"
             style="@style/MoviePoster"
             android:layout_height="180dp"
@@ -53,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:drawablePadding="5dp"
+            android:includeFontPadding="false"
             android:textColor="@color/white"
             android:textStyle="bold"
             card_view:layout_constraintStart_toStartOf="parent"
