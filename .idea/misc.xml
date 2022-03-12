@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.2615" />
         <entry key="app/src/main/res/drawable/ic_home_active.xml" value="0.2615" />
         <entry key="app/src/main/res/drawable/ic_save.xml" value="0.2615" />
+        <entry key="app/src/main/res/drawable/ic_save_active.xml" value="0.2615" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.2615" />
         <entry key="app/src/main/res/drawable/ic_star_active.xml" value="0.2615" />
         <entry key="app/src/main/res/drawable/ratingstars.xml" value="0.2615" />
@@ -22,7 +23,7 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/layout/fragment_movie_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_movie_list.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/item_movie.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/item_movie.xml" value="0.33" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.35520833333333335" />

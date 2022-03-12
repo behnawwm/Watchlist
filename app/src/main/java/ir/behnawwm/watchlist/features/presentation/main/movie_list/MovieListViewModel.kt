@@ -10,12 +10,14 @@ import ir.behnawwm.watchlist.core.platform.BaseViewModel
 import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.TmdbPageResult
 import ir.behnawwm.watchlist.features.domain.use_case.GetPopularMovies
 import ir.behnawwm.watchlist.features.domain.use_case.GetTopRatedMovies
+import ir.behnawwm.watchlist.features.domain.use_case.InsertSavedMovie
 import javax.inject.Inject
 
 @HiltViewModel
 class MovieListViewModel @Inject constructor(
     private val getPopularMovies: GetPopularMovies,
-    private val getTopRatedMovies: GetTopRatedMovies
+    private val getTopRatedMovies: GetTopRatedMovies,
+    private val insertSavedMovie: InsertSavedMovie,
 ) :
     BaseViewModel() {
 
@@ -25,9 +27,12 @@ class MovieListViewModel @Inject constructor(
     private val _topRatedMovies: MutableLiveData<List<MovieView>> = MutableLiveData()
     val topRatedMovies: LiveData<List<MovieView>> = _topRatedMovies
 
+    private val _savedMovieStatus: MutableLiveData<Boolean> = MutableLiveData() //todo change Boolean
+    val savedMovieStatus: LiveData<Boolean> = _savedMovieStatus
+
 
     fun loadPopularMovies() =
-        getPopularMovies(UseCase.None(), viewModelScope) {
+        getPopularMovies(UseCase.None, viewModelScope) {
             it.fold(
                 ::handleFailure,
                 ::handlePopularMovieList
@@ -35,7 +40,7 @@ class MovieListViewModel @Inject constructor(
         }
 
     fun loadTopRatedMovies() =
-        getTopRatedMovies(UseCase.None(), viewModelScope) {
+        getTopRatedMovies(UseCase.None, viewModelScope) {
             it.fold(
                 ::handleFailure,
                 ::handleTopRatedMovieList
@@ -62,5 +67,22 @@ class MovieListViewModel @Inject constructor(
                 it.vote_average
             )
         }
+    }
+
+    fun insertSavedMovie(movie: MovieView) {
+        insertSavedMovie(InsertSavedMovie.Params(movie.toMovieEntity()), viewModelScope) {
+            it.fold(
+                ::handleFailure,
+                ::handleSavedMovieInsertion
+            )
+        }
+    }
+
+    private fun handleSavedMovieInsertion(none: UseCase.None) {
+        _savedMovieStatus.value = true  //todo better way
+    }
+
+    fun removeSavedMovie(movie: MovieView) {
+        _savedMovieStatus.value = false //todo better way
     }
 }

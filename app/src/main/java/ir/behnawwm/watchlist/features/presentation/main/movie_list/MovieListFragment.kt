@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import ir.behnawwm.watchlist.R
@@ -44,6 +43,7 @@ class MovieListFragment : Fragment() {
         with(viewModel) {
             observe(popularMovies, ::renderPopularMoviesList)
             observe(topRatedMovies, ::renderTopRatedMoviesList)
+            observe(savedMovieStatus, ::renderSavedMovieStatus)
             failure(failure, ::handleFailure)
         }
 
@@ -57,7 +57,8 @@ class MovieListFragment : Fragment() {
     private fun initializePopularList() {
         binding.rvPopularMovies.apply {
             popularMoviesAdapter = FastItemAdapter()
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = popularMoviesAdapter
             popularMoviesAdapter.onClickListener = { view, adapter, item, position ->
                 val action =
@@ -67,10 +68,12 @@ class MovieListFragment : Fragment() {
             }
         }
     }
+
     private fun initializeTopRatedList() {
         binding.rvTopRatedMovies.apply {
             topRatedMoviesAdapter = FastItemAdapter()
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = topRatedMoviesAdapter
             topRatedMoviesAdapter.onClickListener = { view, adapter, item, position ->
                 val action =
@@ -78,6 +81,16 @@ class MovieListFragment : Fragment() {
                 findNavController().navigate(action)
                 true
             }
+//            topRatedMoviesAdapter.addEventHook(object : ClickEventHook<MovieListItem>() {
+//
+//                override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
+//                    return AbstractBindingItem
+//                }
+//
+//                override fun onClick(v: View, position: Int, fastAdapter: FastAdapter<MovieListItem>, item: MovieListItem) {
+//                    view
+//                }
+//            })
         }
     }
 
@@ -93,12 +106,35 @@ class MovieListFragment : Fragment() {
     }
 
     private fun renderPopularMoviesList(movies: List<MovieView>?) {
-        popularMoviesAdapter.set(movies.orEmpty().map { it.toMovieListItem() })
+        popularMoviesAdapter.set(movies.orEmpty().map {
+            it.toMovieListItem() { movie, b ->
+                if (b)
+                    viewModel.insertSavedMovie(movie)
+                else
+                    viewModel.removeSavedMovie(movie)
+            }
+        })
         hideProgress()
     }
+
     private fun renderTopRatedMoviesList(movies: List<MovieView>?) {
-        topRatedMoviesAdapter.set(movies.orEmpty().map { it.toMovieListItem() })
+        topRatedMoviesAdapter.set(movies.orEmpty().map {
+            it.toMovieListItem() { movie, b ->
+
+            }
+        })
         hideProgress()
+    }
+
+    private fun renderSavedMovieStatus(isInserted: Boolean?) {  //todo CHANGE! not according to CleanCoding patterns
+        if (isInserted!!)
+            notifyWithAction(R.string.movie_saved_to_watchlist, R.string.view) {
+                findNavController().navigate(R.id.action_movieListFragment_to_savedFragment)
+            }
+        else
+            notifyWithAction(R.string.movie_removed_from_watchlist, R.string.view) {
+                findNavController().navigate(R.id.action_movieListFragment_to_savedFragment)
+            }
     }
 
     private fun handleFailure(failure: Failure?) {

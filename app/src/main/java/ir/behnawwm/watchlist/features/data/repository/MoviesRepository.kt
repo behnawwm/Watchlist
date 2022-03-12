@@ -3,29 +3,37 @@ package ir.behnawwm.watchlist.features.data.repository
 import ir.behnawwm.watchlist.core.constants.GeneralConstants
 import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.functional.Either
+import ir.behnawwm.watchlist.core.interactor.UseCase
 import ir.behnawwm.watchlist.core.utils.NetworkHandler
+import ir.behnawwm.watchlist.features.data.database.dao.MoviesDao
+import ir.behnawwm.watchlist.features.data.database.entity.MovieEntity
 import ir.behnawwm.watchlist.features.data.remote.api_service.MoviesService
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.MovieDetails
 import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.TmdbPageResult
+import okhttp3.internal.notify
 import retrofit2.Call
+import java.lang.Exception
 import javax.inject.Inject
 
 interface MoviesRepository {
-    //    fun movies(): Either<Failure, List<Movie>>
     fun movieDetails(movieId: Int): Either<Failure, MovieDetails>
     fun popularMovies(): Either<Failure, TmdbPageResult>
     fun topRatedMovies(): Either<Failure, TmdbPageResult>
 
+    suspend fun insertSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None>
+    //todo add delete saved movie from db
+
     class Network
     @Inject constructor(
         private val networkHandler: NetworkHandler,
-        private val service: MoviesService
+        private val service: MoviesService,
+        private val dao: MoviesDao
     ) : MoviesRepository {
 
         override fun movieDetails(movieId: Int): Either<Failure, MovieDetails> {
             return when (networkHandler.isNetworkAvailable()) {
                 true -> request(
-                    service.movieDetails(movieId,GeneralConstants.TMDB_TOKEN),
+                    service.movieDetails(movieId, GeneralConstants.TMDB_TOKEN),
                     { it },
                     MovieDetails.empty
                 )
@@ -54,6 +62,16 @@ interface MoviesRepository {
                 false -> Either.Left(Failure.NetworkConnection)
             }
         }
+
+        override suspend fun insertSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None> {
+            return try {
+                dao.insertSavedMovie(movie)
+                Either.Right(UseCase.None)
+            } catch (e: Exception) {
+                Either.Left(Failure.DatabaseError)
+            }
+        }
+
 
         private fun <T, R> request(
             call: Call<T>,

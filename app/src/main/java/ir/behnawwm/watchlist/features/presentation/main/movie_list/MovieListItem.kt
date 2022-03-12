@@ -14,7 +14,8 @@ import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.databinding.ItemMovieBinding
 
 class MovieListItem(
-    val movie: MovieView
+    val movie: MovieView,
+    val saveListener: (MovieView, Boolean) -> Unit,
 ) : AbstractBindingItem<ItemMovieBinding>() {
     override val type: Int
         get() = R.id.fastadapter_movie_list
@@ -28,8 +29,9 @@ class MovieListItem(
             ivMoviePoster.load(movie.poster)
             tvMovieTitle.text = movie.title
             tvRating.text = movie.rating.toString()
-            ivSave.setOnClickListener {
-                //todo
+            sbSave.setOnClickListener {
+                sbSave.isChecked = !sbSave.isChecked
+                saveListener(movie, sbSave.isChecked)
             }
         }
     }

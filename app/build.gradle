@@ -105,8 +105,6 @@ dependencies {
     // Spark Button
     implementation 'com.github.varunest:sparkbutton:1.0.6'
 
-    // Custom RatingBar
-//    implementation 'com.github.ome450901:SimpleRatingBar:1.5.1'
 
 
 }

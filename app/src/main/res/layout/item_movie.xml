@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/movieCard"
@@ -15,13 +16,15 @@
         android:layout_height="match_parent"
         android:padding="4dp">
 
-        <ImageView
-            android:id="@+id/ivSave"
-            android:layout_width="wrap_content"
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/sbSave"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:elevation="4dp"
+            app:sparkbutton_activeImage="@drawable/ic_save_active"
+            app:sparkbutton_iconSize="20dp"
             android:layout_margin="8dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_save"
+            app:sparkbutton_inActiveImage="@drawable/ic_save"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
 

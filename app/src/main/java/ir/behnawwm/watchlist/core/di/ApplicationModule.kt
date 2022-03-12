@@ -1,11 +1,14 @@
 package ir.behnawwm.watchlist.core.di
 
+import android.app.Application
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ir.behnawwm.watchlist.BuildConfig
 import ir.behnawwm.watchlist.core.constants.GeneralConstants
+import ir.behnawwm.watchlist.features.data.database.AppDatabase
 import ir.behnawwm.watchlist.features.data.repository.MoviesRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -38,6 +41,17 @@ class ApplicationModule {
         return okHttpClientBuilder.build()
     }
 
+    @Provides
+    @Singleton
+    fun provideDatabase(app: Application) =
+        Room.databaseBuilder(
+            app,
+            AppDatabase::class.java,
+            GeneralConstants.DATABASE_NAME
+        ).build()
+
+    @Provides
+    fun provideDao(db: AppDatabase) = db.moviesDao
 
     @Provides
     @Singleton

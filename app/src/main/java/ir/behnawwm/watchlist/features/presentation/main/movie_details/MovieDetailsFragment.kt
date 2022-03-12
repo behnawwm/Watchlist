@@ -11,10 +11,7 @@ import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.core.exception.Failure
-import ir.behnawwm.watchlist.core.utils.extension.close
-import ir.behnawwm.watchlist.core.utils.extension.failure
-import ir.behnawwm.watchlist.core.utils.extension.notify
-import ir.behnawwm.watchlist.core.utils.extension.observe
+import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.databinding.FragmentMovieDetailsBinding
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieFailure
 
@@ -40,6 +37,7 @@ class MovieDetailsFragment : Fragment() {
             observe(movieDetails, ::renderMovieDetails)
             failure(failure, ::handleFailure)
         }
+        showProgress()
         viewModel.loadMovieDetails(args.selectedMovieId)
     }
 
@@ -58,6 +56,7 @@ class MovieDetailsFragment : Fragment() {
                 }
             }
         }
+        hideProgress()
     }
 
     private fun handleFailure(failure: Failure?) {
@@ -75,6 +74,7 @@ class MovieDetailsFragment : Fragment() {
                 notify(R.string.failure_server_error); close()
             }
         }
+        hideProgress()
     }
 
 }
