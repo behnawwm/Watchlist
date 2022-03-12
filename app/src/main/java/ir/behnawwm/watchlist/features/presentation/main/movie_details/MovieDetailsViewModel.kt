@@ -30,8 +30,15 @@ class MovieDetailsViewModel @Inject constructor(
 
     private fun handleMovieDetails(movie: MovieDetails) {
         _movieDetails.value = MovieDetailsView(
-            movie.id, movie.title, GeneralConstants.TMDB_IMAGE_PREFIX + movie.poster_path,
-            movie.overview, movie.overview, movie.overview, movie.budget, movie.overview
+            movie.id,
+            movie.title,
+            GeneralConstants.TMDB_IMAGE_PREFIX + movie.poster_path,
+            movie.overview,
+            movie.vote_average,
+            movie.overview,
+            movie.overview,
+            movie.budget,
+            movie.overview
         )
     }
 }

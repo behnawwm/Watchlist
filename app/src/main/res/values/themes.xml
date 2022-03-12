@@ -19,7 +19,9 @@
 
 
         <!--        bottom navigation   -->
-        <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface</item>
+        <item name="bottomNavigationStyle">
+            @style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface
+        </item>
     </style>
 
     <style name="AppTheme.Translucent" parent="Theme.Watchlist">
@@ -75,5 +77,7 @@
         <item name="android:paddingBottom">25dp</item>
         <item name="android:freezesText">true</item>
     </style>
+
+
 
 </resources>

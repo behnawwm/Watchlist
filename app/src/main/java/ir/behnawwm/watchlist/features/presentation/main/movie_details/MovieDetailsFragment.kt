@@ -47,11 +47,13 @@ class MovieDetailsFragment : Fragment() {
         binding.apply {
             movie?.let {
                 with(movie) {
-                    moviePoster.load(poster)
-                    movieSummary.text = summary
-                    movieCast.text = cast
-                    movieDirector.text = director
-                    movieYear.text = year.toString()
+                    ivPoster.load(poster)
+                    tvMovieTitle.text = title
+                    tvDescription.text = summary
+                    tvRating.text = rating.toString()
+//                    movieCast.text = cast
+//                    movieDirector.text = director
+//                    movieYear.text = year.toString()
 //                    moviePlay.setOnClickListener { movieDetailsViewModel.playMovie(trailer) }
                 }
             }
