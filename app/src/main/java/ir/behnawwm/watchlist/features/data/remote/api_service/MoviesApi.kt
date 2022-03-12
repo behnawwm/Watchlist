@@ -9,10 +9,13 @@ import retrofit2.http.Query
 
 internal interface MoviesApi {
 
-
     @GET("3/movie/popular/")
     fun popularMovies(@Query("api_key") token: String): Call<TmdbPageResult>
 
+    @GET("3/movie/top_rated/")
+    fun topRatedMovies(@Query("api_key") token: String): Call<TmdbPageResult>
+
     @GET("3/movie/{id}")
     fun movieDetails(@Path("id") movieId: Int, @Query("api_key") token: String): Call<MovieDetails>
+
 }

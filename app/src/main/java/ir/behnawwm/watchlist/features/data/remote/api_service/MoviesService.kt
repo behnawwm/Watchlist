@@ -12,7 +12,9 @@ class MoviesService
 //    override fun movies() = moviesApi.movies()
 //    override fun movieDetails(movieId: Int) = moviesApi.movieDetails(movieId)
 
-    override fun movieDetails(movieId: Int,token: String)= moviesApi.movieDetails(movieId,token)
+    override fun movieDetails(movieId: Int, token: String) = moviesApi.movieDetails(movieId, token)
 
-    override fun popularMovies(token: String)= moviesApi.popularMovies(token)
+    override fun popularMovies(token: String) = moviesApi.popularMovies(token)
+
+    override fun topRatedMovies(token: String) = moviesApi.topRatedMovies(token)
 }

@@ -5,11 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.behnawwm.watchlist.core.constants.GeneralConstants
-import ir.behnawwm.watchlist.core.interactor.UseCase
 import ir.behnawwm.watchlist.core.platform.BaseViewModel
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.MovieDetails
 import ir.behnawwm.watchlist.features.domain.use_case.GetMovieDetails
-import ir.behnawwm.watchlist.features.domain.use_case.GetMovies
 import javax.inject.Inject
 
 @HiltViewModel

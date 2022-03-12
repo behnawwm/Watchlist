@@ -9,6 +9,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +23,8 @@ class MovieListFragment : Fragment() {
     private lateinit var binding: FragmentMovieListBinding
     private val viewModel: MovieListViewModel by viewModels()
 
-    private lateinit var moviesAdapter: FastItemAdapter<MovieListItem>
+    private lateinit var popularMoviesAdapter: FastItemAdapter<MovieListItem>
+    private lateinit var topRatedMoviesAdapter: FastItemAdapter<MovieListItem>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,19 +42,39 @@ class MovieListFragment : Fragment() {
         loadMoviesList()
 
         with(viewModel) {
-            observe(movies, ::renderMoviesList)
+            observe(popularMovies, ::renderPopularMoviesList)
+            observe(topRatedMovies, ::renderTopRatedMoviesList)
             failure(failure, ::handleFailure)
         }
 
     }
 
     private fun initializeView() {
-        binding.rvMovies.apply {
-            moviesAdapter = FastItemAdapter()
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            adapter = moviesAdapter
-            moviesAdapter.onClickListener = {view,adapter,item,position ->
-                val action = MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.movie.id)
+        initializePopularList()
+        initializeTopRatedList()
+    }
+
+    private fun initializePopularList() {
+        binding.rvPopularMovies.apply {
+            popularMoviesAdapter = FastItemAdapter()
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+            adapter = popularMoviesAdapter
+            popularMoviesAdapter.onClickListener = { view, adapter, item, position ->
+                val action =
+                    MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.movie.id)
+                findNavController().navigate(action)
+                true
+            }
+        }
+    }
+    private fun initializeTopRatedList() {
+        binding.rvTopRatedMovies.apply {
+            topRatedMoviesAdapter = FastItemAdapter()
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+            adapter = topRatedMoviesAdapter
+            topRatedMoviesAdapter.onClickListener = { view, adapter, item, position ->
+                val action =
+                    MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.movie.id)
                 findNavController().navigate(action)
                 true
             }
@@ -62,16 +84,20 @@ class MovieListFragment : Fragment() {
     private fun loadMoviesList() {
         binding.apply {
             ivEmpty.invisible()
-            rvMovies.visible()
+            rvPopularMovies.visible()
+            rvTopRatedMovies.visible()
         }
-
         showProgress()
-        viewModel.loadMovies()
-
+        viewModel.loadPopularMovies()
+        viewModel.loadTopRatedMovies()
     }
 
-    private fun renderMoviesList(movies: List<MovieView>?) {
-        moviesAdapter.set(movies.orEmpty().map { it.toMovieListItem() })
+    private fun renderPopularMoviesList(movies: List<MovieView>?) {
+        popularMoviesAdapter.set(movies.orEmpty().map { it.toMovieListItem() })
+        hideProgress()
+    }
+    private fun renderTopRatedMoviesList(movies: List<MovieView>?) {
+        topRatedMoviesAdapter.set(movies.orEmpty().map { it.toMovieListItem() })
         hideProgress()
     }
 
@@ -86,7 +112,8 @@ class MovieListFragment : Fragment() {
 
     private fun renderFailure(@StringRes message: Int) {
         binding.apply {
-            rvMovies.invisible()
+            rvPopularMovies.invisible()
+            rvTopRatedMovies.invisible()
             ivEmpty.visible()
         }
         hideProgress()

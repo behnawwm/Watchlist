@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/drawable/scrim.xml" value="0.2615" />
         <entry key="app/src/main/res/font-v26/font_poppins.xml" value="0.3854166666666667" />
         <entry key="app/src/main/res/font/font_poppins.xml" value="0.3854166666666667" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1796875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/layout/fragment_movie_details.xml" value="0.25" />

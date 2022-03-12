@@ -14,6 +14,7 @@ interface MoviesRepository {
     //    fun movies(): Either<Failure, List<Movie>>
     fun movieDetails(movieId: Int): Either<Failure, MovieDetails>
     fun popularMovies(): Either<Failure, TmdbPageResult>
+    fun topRatedMovies(): Either<Failure, TmdbPageResult>
 
     class Network
     @Inject constructor(
@@ -36,6 +37,17 @@ interface MoviesRepository {
             return when (networkHandler.isNetworkAvailable()) {
                 true -> request(
                     service.popularMovies(GeneralConstants.TMDB_TOKEN),
+                    { it },
+                    TmdbPageResult.empty
+                )
+                false -> Either.Left(Failure.NetworkConnection)
+            }
+        }
+
+        override fun topRatedMovies(): Either<Failure, TmdbPageResult> {
+            return when (networkHandler.isNetworkAvailable()) {
+                true -> request(
+                    service.topRatedMovies(GeneralConstants.TMDB_TOKEN),
                     { it },
                     TmdbPageResult.empty
                 )
