@@ -30,10 +30,10 @@
     </fragment>
     <fragment
         android:id="@+id/savedFragment"
-        android:name="ir.behnawwm.watchlist.features.presentation.main.search.SavedFragment"
+        android:name="ir.behnawwm.watchlist.features.presentation.main.saved.SavedFragment"
         android:label="SavedFragment" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="ir.behnawwm.watchlist.features.presentation.main.saved.SearchFragment"
+        android:name="ir.behnawwm.watchlist.features.presentation.main.search.SearchFragment"
         android:label="SearchFragment" />
 </navigation>

@@ -21,7 +21,9 @@ interface MoviesRepository {
     fun topRatedMovies(): Either<Failure, TmdbPageResult>
 
     suspend fun insertSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None>
+    suspend fun savedMovies(): Either<Failure, List<MovieEntity>>
     //todo add delete saved movie from db
+    //todo check if suspend is needed
 
     class Network
     @Inject constructor(
@@ -60,6 +62,15 @@ interface MoviesRepository {
                     TmdbPageResult.empty
                 )
                 false -> Either.Left(Failure.NetworkConnection)
+            }
+        }
+
+        override suspend fun savedMovies(): Either<Failure, List<MovieEntity>> {
+            return try {
+                val movies = dao.getAllSavedMovies()
+                Either.Right(movies)
+            } catch (e: Exception) {
+                Either.Left(Failure.DatabaseError)
             }
         }
 

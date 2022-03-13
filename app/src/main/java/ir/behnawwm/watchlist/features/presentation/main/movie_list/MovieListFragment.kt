@@ -39,14 +39,17 @@ class MovieListFragment : Fragment() {
 
         initializeView()
         loadMoviesList()
+        initObservers()
 
+    }
+
+    private fun initObservers() {
         with(viewModel) {
             observe(popularMovies, ::renderPopularMoviesList)
             observe(topRatedMovies, ::renderTopRatedMoviesList)
             observe(savedMovieStatus, ::renderSavedMovieStatus)
             failure(failure, ::handleFailure)
         }
-
     }
 
     private fun initializeView() {
