@@ -26,6 +26,7 @@
         <entry key="app/src/main/res/layout/fragment_saved.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.21331521739130435" />
         <entry key="app/src/main/res/layout/item_movie.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_saved_movie.xml" value="0.33" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.35520833333333335" />

@@ -17,5 +17,5 @@ data class MovieView(
 
     fun toMovieListItem(listener: (MovieView, Boolean) -> Unit) = MovieListItem(this, listener)
     fun toSavedMovieListItem() = SavedMovieListItem(this)
-    fun toMovieEntity() = MovieEntity(id,poster,title,rating)
+    fun toMovieEntity() = MovieEntity(id,title,poster,rating)
 }

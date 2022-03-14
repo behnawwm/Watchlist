@@ -1,4 +1,4 @@
-package ir.behnawwm.watchlist.features.data.repository
+package ir.behnawwm.watchlist.features.domain.repository
 
 import ir.behnawwm.watchlist.core.constants.GeneralConstants
 import ir.behnawwm.watchlist.core.exception.Failure
@@ -10,7 +10,6 @@ import ir.behnawwm.watchlist.features.data.database.entity.MovieEntity
 import ir.behnawwm.watchlist.features.data.remote.api_service.MoviesService
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.MovieDetails
 import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.TmdbPageResult
-import okhttp3.internal.notify
 import retrofit2.Call
 import java.lang.Exception
 import javax.inject.Inject

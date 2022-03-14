@@ -40,5 +40,6 @@ fun Fragment.notifyWithAction(
     val snackBar = Snackbar.make(viewContainer, message, Snackbar.LENGTH_INDEFINITE)
     snackBar.setAction(actionText) { _ -> action.invoke() }
     snackBar.setActionTextColor(ContextCompat.getColor(appContext, R.color.colorTextPrimary))
+    snackBar.duration = Snackbar.LENGTH_SHORT
     snackBar.show()
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.behnawwm.watchlist.core.constants.GeneralConstants
+import ir.behnawwm.watchlist.core.functional.Event
 import ir.behnawwm.watchlist.core.interactor.UseCase
 import ir.behnawwm.watchlist.core.platform.BaseViewModel
 import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.TmdbPageResult
@@ -27,8 +28,8 @@ class MovieListViewModel @Inject constructor(
     private val _topRatedMovies: MutableLiveData<List<MovieView>> = MutableLiveData()
     val topRatedMovies: LiveData<List<MovieView>> = _topRatedMovies
 
-    private val _savedMovieStatus: MutableLiveData<Boolean> = MutableLiveData() //todo change Boolean
-    val savedMovieStatus: LiveData<Boolean> = _savedMovieStatus
+    private val _savedMovieStatus: MutableLiveData<Event<Boolean>> = MutableLiveData() //todo change Boolean
+    val savedMovieStatus: LiveData<Event<Boolean>> = _savedMovieStatus
 
 
     fun loadPopularMovies() =
@@ -79,10 +80,10 @@ class MovieListViewModel @Inject constructor(
     }
 
     private fun handleSavedMovieInsertion(none: UseCase.None) {
-        _savedMovieStatus.value = true  //todo better way
+        _savedMovieStatus.value = Event(true)  //todo better way
     }
 
     fun removeSavedMovie(movie: MovieView) {
-        _savedMovieStatus.value = false //todo better way
+        _savedMovieStatus.value = Event(true)  //todo better way
     }
 }

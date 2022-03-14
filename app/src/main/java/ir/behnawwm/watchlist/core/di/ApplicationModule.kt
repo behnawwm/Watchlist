@@ -9,7 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import ir.behnawwm.watchlist.BuildConfig
 import ir.behnawwm.watchlist.core.constants.GeneralConstants
 import ir.behnawwm.watchlist.features.data.database.AppDatabase
-import ir.behnawwm.watchlist.features.data.repository.MoviesRepository
+import ir.behnawwm.watchlist.features.domain.repository.MoviesRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

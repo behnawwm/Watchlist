@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,12 +34,23 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initializeView()
         with(viewModel) {
             observe(movieDetails, ::renderMovieDetails)
             failure(failure, ::handleFailure)
         }
         showProgress()
         viewModel.loadMovieDetails(args.selectedMovieId)
+    }
+    private fun initializeView() {
+        binding.apply {
+            btnBack.setOnClickListener {
+                close()
+            }
+            btnSave.setOnClickListener {
+                //todo
+            }
+        }
     }
 
     private fun renderMovieDetails(movie: MovieDetailsView?) {

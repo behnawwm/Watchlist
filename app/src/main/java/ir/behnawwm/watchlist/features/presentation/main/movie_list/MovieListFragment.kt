@@ -14,6 +14,8 @@ import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.core.exception.Failure
+import ir.behnawwm.watchlist.core.functional.Event
+import ir.behnawwm.watchlist.core.functional.EventObserver
 import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.databinding.FragmentMovieListBinding
 
@@ -47,9 +49,12 @@ class MovieListFragment : Fragment() {
         with(viewModel) {
             observe(popularMovies, ::renderPopularMoviesList)
             observe(topRatedMovies, ::renderTopRatedMoviesList)
-            observe(savedMovieStatus, ::renderSavedMovieStatus)
+//            observeEvent(savedMovieStatus, ::renderSavedMovieStatus)  todo make extension
             failure(failure, ::handleFailure)
         }
+        viewModel.savedMovieStatus.observe(viewLifecycleOwner, EventObserver {
+            renderSavedMovieStatus(it)
+        })
     }
 
     private fun initializeView() {
@@ -99,9 +104,11 @@ class MovieListFragment : Fragment() {
 
     private fun loadMoviesList() {
         binding.apply {
-            ivEmpty.invisible()
-            rvPopularMovies.visible()
-            rvTopRatedMovies.visible()
+//            ivEmpty.invisible()
+            rvPopularMovies.invisible()
+            rvTopRatedMovies.invisible()
+            tvPopular.invisible()
+            tvTopRated.invisible()
         }
         showProgress()
         viewModel.loadPopularMovies()
@@ -117,20 +124,30 @@ class MovieListFragment : Fragment() {
                     viewModel.removeSavedMovie(movie)
             }
         })
+        binding.apply {
+//            ivEmpty.invisible()
+            rvPopularMovies.visible()
+            rvTopRatedMovies.visible()
+            tvPopular.visible()
+            tvTopRated.visible()
+        }
         hideProgress()
     }
 
     private fun renderTopRatedMoviesList(movies: List<MovieView>?) {
         topRatedMoviesAdapter.set(movies.orEmpty().map {
             it.toMovieListItem() { movie, b ->
-
+                if (b)
+                    viewModel.insertSavedMovie(movie)
+                else
+                    viewModel.removeSavedMovie(movie)
             }
         })
         hideProgress()
     }
 
-    private fun renderSavedMovieStatus(isInserted: Boolean?) {  //todo CHANGE! not according to CleanCoding patterns
-        if (isInserted!!)
+    private fun renderSavedMovieStatus(isInserted: Boolean) {  //todo CHANGE! not according to CleanCoding patterns
+        if (isInserted)
             notifyWithAction(R.string.movie_saved_to_watchlist, R.string.view) {
                 findNavController().navigate(R.id.action_movieListFragment_to_savedFragment)
             }
@@ -153,7 +170,7 @@ class MovieListFragment : Fragment() {
         binding.apply {
             rvPopularMovies.invisible()
             rvTopRatedMovies.invisible()
-            ivEmpty.visible()
+//            ivEmpty.visible()
         }
         hideProgress()
         notifyWithAction(message, R.string.action_refresh, ::loadMoviesList)
