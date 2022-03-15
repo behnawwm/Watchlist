@@ -11,7 +11,7 @@ data class MovieView(
     val poster: String,
     val title: String,
     val rating: Double,
-//    todo add isSaved
+    var isSaved : Boolean
 ) : Parcelable {
 
 

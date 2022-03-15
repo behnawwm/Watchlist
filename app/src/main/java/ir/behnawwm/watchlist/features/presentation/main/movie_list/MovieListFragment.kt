@@ -40,26 +40,29 @@ class MovieListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initializeView()
-        loadMoviesList()
         initObservers()
-
-    }
-
-    private fun initObservers() {
-        with(viewModel) {
-            observe(popularMovies, ::renderPopularMoviesList)
-            observe(topRatedMovies, ::renderTopRatedMoviesList)
-//            observeEvent(savedMovieStatus, ::renderSavedMovieStatus)  todo make extension
-            failure(failure, ::handleFailure)
-        }
-        viewModel.savedMovieStatus.observe(viewLifecycleOwner, EventObserver {
-            renderSavedMovieStatus(it)
-        })
+        loadSavedMoviesList()
     }
 
     private fun initializeView() {
         initializePopularList()
         initializeTopRatedList()
+    }
+
+    private fun initObservers() {
+        with(viewModel) {
+            observe(savedMovies, ::proceedToLoadMoviesLists)
+            observe(popularMovies, ::renderPopularMoviesList)
+            observe(topRatedMovies, ::renderTopRatedMoviesList)
+            observeEvent(savedMovieStatus, ::renderSavedMovieStatus)
+            failure(failure, ::handleFailure)
+        }
+    }
+
+    private fun loadSavedMoviesList() {
+        hideAllViews()
+        showProgress()
+        viewModel.loadSavedMoviesList()
     }
 
     private fun initializePopularList() {
@@ -89,28 +92,14 @@ class MovieListFragment : Fragment() {
                 findNavController().navigate(action)
                 true
             }
-//            topRatedMoviesAdapter.addEventHook(object : ClickEventHook<MovieListItem>() {
-//
-//                override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
-//                    return AbstractBindingItem
-//                }
-//
-//                override fun onClick(v: View, position: Int, fastAdapter: FastAdapter<MovieListItem>, item: MovieListItem) {
-//                    view
-//                }
-//            })
         }
     }
 
-    private fun loadMoviesList() {
-        binding.apply {
-//            ivEmpty.invisible()
-            rvPopularMovies.invisible()
-            rvTopRatedMovies.invisible()
-            tvPopular.invisible()
-            tvTopRated.invisible()
-        }
-        showProgress()
+    private fun proceedToLoadMoviesLists(savedMovies: List<MovieView>?) {
+        loadMoviesLists()
+    }
+
+    private fun loadMoviesLists() {
         viewModel.loadPopularMovies()
         viewModel.loadTopRatedMovies()
     }
@@ -124,13 +113,7 @@ class MovieListFragment : Fragment() {
                     viewModel.removeSavedMovie(movie)
             }
         })
-        binding.apply {
-//            ivEmpty.invisible()
-            rvPopularMovies.visible()
-            rvTopRatedMovies.visible()
-            tvPopular.visible()
-            tvTopRated.visible()
-        }
+        showAllViews()
         hideProgress()
     }
 
@@ -146,15 +129,17 @@ class MovieListFragment : Fragment() {
         hideProgress()
     }
 
-    private fun renderSavedMovieStatus(isInserted: Boolean) {  //todo CHANGE! not according to CleanCoding patterns
-        if (isInserted)
-            notifyWithAction(R.string.movie_saved_to_watchlist, R.string.view) {
-                findNavController().navigate(R.id.action_movieListFragment_to_savedFragment)
-            }
-        else
-            notifyWithAction(R.string.movie_removed_from_watchlist, R.string.view) {
-                findNavController().navigate(R.id.action_movieListFragment_to_savedFragment)
-            }
+    private fun renderSavedMovieStatus(isInserted: Boolean?) {  //todo CHANGE! not according to CleanCoding patterns
+        isInserted?.let {
+            if (isInserted)
+                notifyWithAction(R.string.movie_saved_to_watchlist, R.string.view) {
+                    findNavController().navigate(R.id.action_movieListFragment_to_savedFragment)
+                }
+            else
+                notifyWithAction(R.string.movie_removed_from_watchlist, R.string.view) {
+                    findNavController().navigate(R.id.action_movieListFragment_to_savedFragment)
+                }
+        }
     }
 
     private fun handleFailure(failure: Failure?) {
@@ -173,6 +158,27 @@ class MovieListFragment : Fragment() {
 //            ivEmpty.visible()
         }
         hideProgress()
-        notifyWithAction(message, R.string.action_refresh, ::loadMoviesList)
+        notifyWithAction(message, R.string.action_refresh, ::loadMoviesLists)
+    }
+
+
+    private fun hideAllViews() {
+        binding.apply {
+//            ivEmpty.invisible()
+            rvPopularMovies.invisible()
+            rvTopRatedMovies.invisible()
+            tvPopular.invisible()
+            tvTopRated.invisible()
+        }
+    }
+
+    private fun showAllViews() {
+        binding.apply {
+//            ivEmpty.invisible()
+            rvPopularMovies.visible()
+            rvTopRatedMovies.visible()
+            tvPopular.visible()
+            tvTopRated.visible()
+        }
     }
 }

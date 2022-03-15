@@ -29,6 +29,7 @@ class MovieListItem(
             ivMoviePoster.load(movie.poster)
             tvMovieTitle.text = movie.title
             tvRating.text = movie.rating.toString()
+            sbSave.isChecked = movie.isSaved
             sbSave.setOnClickListener {
                 sbSave.isChecked = !sbSave.isChecked
                 saveListener(movie, sbSave.isChecked)
