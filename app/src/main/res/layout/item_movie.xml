@@ -18,12 +18,13 @@
 
         <com.varunest.sparkbutton.SparkButton
             android:id="@+id/sbSave"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_margin="8dp"
             android:elevation="4dp"
+            android:padding="4dp"
             app:sparkbutton_activeImage="@drawable/ic_save_active"
             app:sparkbutton_iconSize="20dp"
-            android:layout_margin="8dp"
             app:sparkbutton_inActiveImage="@drawable/ic_save"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />

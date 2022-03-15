@@ -27,6 +27,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/tvMorePopular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:text="More >"
+                app:layout_goneMarginRight="16dp"
+                android:textColor="@color/yellow"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPopular"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvPopular" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPopularMovies"
                 android:layout_width="match_parent"
@@ -46,6 +59,18 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rvPopularMovies" />
+
+            <TextView
+                android:id="@+id/tvMoreTopRated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:text="More >"
+                android:textColor="@color/yellow"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTopRated"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvTopRated" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvTopRatedMovies"

@@ -15,14 +15,18 @@
         <entry key="app/src/main/res/drawable/ic_star_active.xml" value="0.2615" />
         <entry key="app/src/main/res/drawable/ratingstars.xml" value="0.2615" />
         <entry key="app/src/main/res/drawable/ripple_effect.xml" value="0.2615" />
+        <entry key="app/src/main/res/drawable/rounded_dialog.xml" value="0.234" />
         <entry key="app/src/main/res/drawable/scrim.xml" value="0.2615" />
+        <entry key="app/src/main/res/drawable/shape_rounded_corners.xml" value="0.2615" />
         <entry key="app/src/main/res/font-v26/font_poppins.xml" value="0.3854166666666667" />
         <entry key="app/src/main/res/font/font_poppins.xml" value="0.3854166666666667" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1796875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33106884057971014" />
+        <entry key="app/src/main/res/layout/bottom_sheet_layout.xml" value="0.33106884057971014" />
+        <entry key="app/src/main/res/layout/bottom_sheet_list_item.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/layout/fragment_movie_details.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_movie_list.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_movie_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_saved.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.21331521739130435" />
         <entry key="app/src/main/res/layout/item_movie.xml" value="0.33" />

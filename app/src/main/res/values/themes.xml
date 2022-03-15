@@ -17,6 +17,8 @@
         <item name="android:navigationBarColor">@color/black</item>
         <item name="android:fontFamily">@font/font_poppins</item>
 
+        <!--        BottomSheet     -->
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
 
         <!--        bottom navigation   -->
         <item name="bottomNavigationStyle">
@@ -78,6 +80,26 @@
         <item name="android:freezesText">true</item>
     </style>
 
+    <!--    divider  -->
+    <style name="HorizontalDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/dividerLineColor</item>
+    </style>
+    <!--    Bottom Sheet    -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_dialog</item>
+    </style>
 
 
 </resources>

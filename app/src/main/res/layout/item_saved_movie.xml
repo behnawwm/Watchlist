@@ -44,7 +44,7 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintEnd_toStartOf="@+id/ivOptions"
             app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/app_name" />
@@ -73,9 +73,10 @@
             card_view:layout_constraintTop_toTopOf="@+id/tvRating" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/ivOptions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="16dp"
             android:background="@drawable/ic_options"
             android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

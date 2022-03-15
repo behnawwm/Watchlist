@@ -1,17 +1,12 @@
 package ir.behnawwm.watchlist.features.presentation.main.saved
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import coil.load
-import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
-import com.mikepenz.fastadapter.items.AbstractItem
+import com.mikepenz.fastadapter.binding.BindingViewHolder
 import ir.behnawwm.watchlist.R
-import ir.behnawwm.watchlist.databinding.ItemMovieBinding
+import ir.behnawwm.watchlist.core.utils.ui.OptionBottomSheetDialog
 import ir.behnawwm.watchlist.databinding.ItemSavedMovieBinding
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
 

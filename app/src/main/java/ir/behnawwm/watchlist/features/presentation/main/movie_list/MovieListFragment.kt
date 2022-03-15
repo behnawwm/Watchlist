@@ -168,6 +168,8 @@ class MovieListFragment : Fragment() {
             rvTopRatedMovies.invisible()
             tvPopular.invisible()
             tvTopRated.invisible()
+            tvMorePopular.invisible()
+            tvMoreTopRated.invisible()
         }
     }
 
@@ -178,6 +180,8 @@ class MovieListFragment : Fragment() {
             rvTopRatedMovies.visible()
             tvPopular.visible()
             tvTopRated.visible()
+            tvMorePopular.visible()
+            tvMoreTopRated.visible()
         }
     }
 }

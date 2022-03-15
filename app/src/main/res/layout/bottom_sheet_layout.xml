@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_rounded_corners"
+            android:backgroundTint="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_title_dialog"
+            fontPath="fonts/bold.ttf"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:ignore="MissingPrefix"
+            tools:text="Title"
+            />
+
+        <View
+            android:id="@+id/titleDivider"
+            style="@style/HorizontalDivider"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bottomSheetRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:clipToPadding="false"
+            />
+
+    </LinearLayout>
+</layout>

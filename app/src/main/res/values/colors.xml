@@ -20,6 +20,9 @@
     <color name="colorPrimary">@color/black</color>
     <color name="colorSecondary">@color/yellow</color>
 
+    <color name="dividerLineColor">#1fffffff</color>
+    <color name="red">#ec2637</color>
+    <color name="bottom_sheet_background">#292929</color>
 
     <color name="translucentBackground">#ED000000</color>
 </resources>

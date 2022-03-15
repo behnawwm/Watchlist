@@ -13,11 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.behnawwm.watchlist.core.constants.GeneralConstants
+import ir.behnawwm.watchlist.core.functional.Event
 import ir.behnawwm.watchlist.core.interactor.UseCase
 import ir.behnawwm.watchlist.core.platform.BaseViewModel
 import ir.behnawwm.watchlist.databinding.FragmentSavedBinding
 import ir.behnawwm.watchlist.features.data.database.entity.MovieEntity
 import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.TmdbPageResult
+import ir.behnawwm.watchlist.features.domain.use_case.DeleteSavedMovie
 import ir.behnawwm.watchlist.features.domain.use_case.GetAllSavedMovies
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
 import javax.inject.Inject
@@ -25,10 +27,15 @@ import javax.inject.Inject
 @HiltViewModel
 class SavedFragmentViewModel @Inject constructor(
     private val getAllSavedMovies: GetAllSavedMovies,
+    private val deleteSavedMovie: DeleteSavedMovie
 ) : BaseViewModel() {
 
     private val _savedMovies: MutableLiveData<List<MovieView>> = MutableLiveData()
     val savedMovies: LiveData<List<MovieView>> = _savedMovies
+
+    private val _savedMovieStatus: MutableLiveData<Event<Boolean>> =
+        MutableLiveData() //todo change Boolean
+    val savedMovieStatus: LiveData<Event<Boolean>> = _savedMovieStatus
 
     fun loadSavedMovies() {
         getAllSavedMovies(UseCase.None, viewModelScope) {
@@ -43,5 +50,16 @@ class SavedFragmentViewModel @Inject constructor(
         _savedMovies.value = movies.map { it.toMovieView() }
     }
 
+    fun deleteSavedMovie(movie: MovieView) {
+        deleteSavedMovie(DeleteSavedMovie.Params(movie.toMovieEntity()), viewModelScope) {
+            it.fold(
+                ::handleFailure,
+                ::handleSavedMovieDeletion
+            )
+        }
+    }
 
+    private fun handleSavedMovieDeletion(none: UseCase.None) {
+        _savedMovieStatus.value = Event(false)  //todo better way
+    }
 }
