@@ -20,6 +20,7 @@ interface MoviesRepository {
     fun topRatedMovies(): Either<Failure, TmdbPageResult>
 
     suspend fun insertSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None>
+    suspend fun deleteSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None>
     suspend fun savedMovies(): Either<Failure, List<MovieEntity>>
     //todo add delete saved movie from db
     //todo check if suspend is needed
@@ -76,6 +77,15 @@ interface MoviesRepository {
         override suspend fun insertSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None> {
             return try {
                 dao.insertSavedMovie(movie)
+                Either.Right(UseCase.None)
+            } catch (e: Exception) {
+                Either.Left(Failure.DatabaseError)
+            }
+        }
+
+        override suspend fun deleteSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None> {
+            return try {
+                dao.deleteSavedMovie(movie)
                 Either.Right(UseCase.None)
             } catch (e: Exception) {
                 Either.Left(Failure.DatabaseError)

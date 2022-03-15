@@ -11,11 +11,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
+import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import dagger.hilt.android.AndroidEntryPoint
 import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.core.exception.Failure
-import ir.behnawwm.watchlist.core.functional.Event
-import ir.behnawwm.watchlist.core.functional.EventObserver
 import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.databinding.FragmentMovieListBinding
 
@@ -40,8 +39,8 @@ class MovieListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initializeView()
-        initObservers()
         loadSavedMoviesList()
+        initObservers()
     }
 
     private fun initializeView() {
@@ -51,9 +50,9 @@ class MovieListFragment : Fragment() {
 
     private fun initObservers() {
         with(viewModel) {
-            observe(savedMovies, ::proceedToLoadMoviesLists)
-            observe(popularMovies, ::renderPopularMoviesList)
-            observe(topRatedMovies, ::renderTopRatedMoviesList)
+            observeEvent(savedMovies, ::proceedToLoadMoviesLists)
+            observeEvent(popularMovies, ::renderPopularMoviesList)
+            observeEvent(topRatedMovies, ::renderTopRatedMoviesList)
             observeEvent(savedMovieStatus, ::renderSavedMovieStatus)
             failure(failure, ::handleFailure)
         }
@@ -110,7 +109,7 @@ class MovieListFragment : Fragment() {
                 if (b)
                     viewModel.insertSavedMovie(movie)
                 else
-                    viewModel.removeSavedMovie(movie)
+                    viewModel.deleteSavedMovie(movie)
             }
         })
         showAllViews()
@@ -123,21 +122,21 @@ class MovieListFragment : Fragment() {
                 if (b)
                     viewModel.insertSavedMovie(movie)
                 else
-                    viewModel.removeSavedMovie(movie)
+                    viewModel.deleteSavedMovie(movie)
             }
         })
         hideProgress()
     }
 
-    private fun renderSavedMovieStatus(isInserted: Boolean?) {  //todo CHANGE! not according to CleanCoding patterns
+    private fun renderSavedMovieStatus(isInserted: Boolean?) {  //todo CHANGE! not according to Clean
         isInserted?.let {
             if (isInserted)
                 notifyWithAction(R.string.movie_saved_to_watchlist, R.string.view) {
-                    findNavController().navigate(R.id.action_movieListFragment_to_savedFragment)
+                    findNavController().navigate(R.id.action_global_savedFragment)
                 }
             else
                 notifyWithAction(R.string.movie_removed_from_watchlist, R.string.view) {
-                    findNavController().navigate(R.id.action_movieListFragment_to_savedFragment)
+                    findNavController().navigate(R.id.action_global_savedFragment)
                 }
         }
     }
@@ -158,7 +157,7 @@ class MovieListFragment : Fragment() {
 //            ivEmpty.visible()
         }
         hideProgress()
-        notifyWithAction(message, R.string.action_refresh, ::loadMoviesLists)
+        notifyWithAction(message, R.string.action_refresh, ::loadSavedMoviesList)
     }
 
 

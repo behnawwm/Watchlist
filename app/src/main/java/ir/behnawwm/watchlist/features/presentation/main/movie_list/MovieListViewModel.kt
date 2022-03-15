@@ -10,10 +10,7 @@ import ir.behnawwm.watchlist.core.interactor.UseCase
 import ir.behnawwm.watchlist.core.platform.BaseViewModel
 import ir.behnawwm.watchlist.features.data.database.entity.MovieEntity
 import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.TmdbPageResult
-import ir.behnawwm.watchlist.features.domain.use_case.GetAllSavedMovies
-import ir.behnawwm.watchlist.features.domain.use_case.GetPopularMovies
-import ir.behnawwm.watchlist.features.domain.use_case.GetTopRatedMovies
-import ir.behnawwm.watchlist.features.domain.use_case.InsertSavedMovie
+import ir.behnawwm.watchlist.features.domain.use_case.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,22 +18,23 @@ class MovieListViewModel @Inject constructor(
     private val getPopularMovies: GetPopularMovies,
     private val getTopRatedMovies: GetTopRatedMovies,
     private val insertSavedMovie: InsertSavedMovie,
+    private val deleteSavedMovie: DeleteSavedMovie,
     private val getAllSavedMovies: GetAllSavedMovies
 ) :
     BaseViewModel() {
 
-    private val _popularMovies: MutableLiveData<List<MovieView>> = MutableLiveData()
-    val popularMovies: LiveData<List<MovieView>> = _popularMovies
+    private val _popularMovies: MutableLiveData<Event<List<MovieView>>> = MutableLiveData()
+    val popularMovies: LiveData<Event<List<MovieView>>> = _popularMovies
 
-    private val _topRatedMovies: MutableLiveData<List<MovieView>> = MutableLiveData()
-    val topRatedMovies: LiveData<List<MovieView>> = _topRatedMovies
+    private val _topRatedMovies: MutableLiveData<Event<List<MovieView>>> = MutableLiveData()
+    val topRatedMovies: LiveData<Event<List<MovieView>>> = _topRatedMovies
 
     private val _savedMovieStatus: MutableLiveData<Event<Boolean>> =
         MutableLiveData() //todo change Boolean
     val savedMovieStatus: LiveData<Event<Boolean>> = _savedMovieStatus
 
-    private val _savedMovies: MutableLiveData<List<MovieView>> = MutableLiveData()
-    val savedMovies: LiveData<List<MovieView>> = _savedMovies
+    private val _savedMovies: MutableLiveData<Event<List<MovieView>>> = MutableLiveData()
+    val savedMovies: LiveData<Event<List<MovieView>>> = _savedMovies
 
     fun loadSavedMoviesList() =
         getAllSavedMovies(UseCase.None, viewModelScope) {
@@ -61,12 +59,12 @@ class MovieListViewModel @Inject constructor(
 
 
     private fun handleSavedMoviesList(savedMovies: List<MovieEntity>) {
-        _savedMovies.value = savedMovies.map { it.toMovieView() }
+        _savedMovies.value = Event(savedMovies.map { it.toMovieView() })
     }
 
     private fun handlePopularMovieList(movies: TmdbPageResult) {
-        val savedMoviesIdList = savedMovies.value.orEmpty().map { it.id }
-        _popularMovies.value = movies.results.map {
+        val savedMoviesIdList = savedMovies.value?.peekContent().orEmpty().map { it.id }
+        _popularMovies.value = Event(movies.results.map {
             MovieView(
                 it.id,
                 GeneralConstants.TMDB_IMAGE_PREFIX + it.poster_path,
@@ -74,13 +72,13 @@ class MovieListViewModel @Inject constructor(
                 it.vote_average,
                 savedMoviesIdList.contains(it.id)
             )
-        }
+        })
     }
 
     private fun handleTopRatedMovieList(movies: TmdbPageResult) {
-        val savedMoviesIdList = savedMovies.value.orEmpty().map { it.id }
+        val savedMoviesIdList = savedMovies.value?.peekContent().orEmpty().map { it.id }
 
-        _topRatedMovies.value = movies.results.map {
+        _topRatedMovies.value = Event(movies.results.map {
             MovieView(
                 it.id,
                 GeneralConstants.TMDB_IMAGE_PREFIX + it.poster_path,
@@ -88,7 +86,7 @@ class MovieListViewModel @Inject constructor(
                 it.vote_average,
                 savedMoviesIdList.contains(it.id)
             )
-        }
+        })
     }
 
     fun insertSavedMovie(movie: MovieView) {
@@ -104,7 +102,16 @@ class MovieListViewModel @Inject constructor(
         _savedMovieStatus.value = Event(true)  //todo better way
     }
 
-    fun removeSavedMovie(movie: MovieView) {
+    fun deleteSavedMovie(movie: MovieView) {
+        deleteSavedMovie(DeleteSavedMovie.Params(movie.toMovieEntity()), viewModelScope) {
+            it.fold(
+                ::handleFailure,
+                ::handleSavedMovieDeletion
+            )
+        }
+    }
+
+    private fun handleSavedMovieDeletion(none: UseCase.None) {
         _savedMovieStatus.value = Event(false)  //todo better way
     }
 }
