@@ -30,7 +30,7 @@
         android:id="@+id/savedFragment"
         android:name="ir.behnawwm.watchlist.features.presentation.main.saved.SavedFragment"
         android:label="SavedFragment"
-        tools:layout="@layout/fragment_saved" >
+        tools:layout="@layout/fragment_saved">
         <action
             android:id="@+id/action_savedFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
@@ -43,4 +43,10 @@
     <action
         android:id="@+id/action_global_savedFragment"
         app:destination="@id/savedFragment" />
+    <action
+        android:id="@+id/action_global_searchFragment"
+        app:destination="@id/searchFragment" />
+    <action
+        android:id="@+id/action_global_movieListFragment"
+        app:destination="@id/movieListFragment" />
 </navigation>

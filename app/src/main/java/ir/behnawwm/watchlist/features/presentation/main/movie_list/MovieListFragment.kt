@@ -131,13 +131,16 @@ class MovieListFragment : Fragment() {
     private fun renderSavedMovieStatus(isInserted: Boolean?) {  //todo CHANGE! not according to Clean
         isInserted?.let {
             if (isInserted)
-                notifyWithAction(R.string.movie_saved_to_watchlist, R.string.view) {
-                    findNavController().navigate(R.id.action_global_savedFragment)
-                }
+//                notifyWithAction(R.string.movie_saved_to_watchlist, R.string.view) {  //todo check why couldn't navigate back
+//                    findNavController().navigate(R.id.action_global_savedFragment)
+//                }
+                notify(R.string.movie_saved_to_watchlist)
             else
-                notifyWithAction(R.string.movie_removed_from_watchlist, R.string.view) {
-                    findNavController().navigate(R.id.action_global_savedFragment)
-                }
+//                notifyWithAction(R.string.movie_removed_from_watchlist, R.string.view) {
+//                    findNavController().navigate(R.id.action_global_savedFragment)
+//                }
+                notify(R.string.movie_removed_from_watchlist)
+
         }
     }
 
