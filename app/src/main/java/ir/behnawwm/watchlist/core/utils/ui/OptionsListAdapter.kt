@@ -10,7 +10,7 @@ import com.mikepenz.fastadapter.binding.BindingViewHolder
 import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.databinding.BottomSheetListItemBinding
 
-class  BottomSheetListAdapter(
+class  OptionsListAdapter(
     private val titleResList: List<String>,
     private val iconResList: List<Int>?,
     private val selectedPosition: Int,

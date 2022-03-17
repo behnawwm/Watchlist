@@ -42,7 +42,7 @@ open class OptionBottomSheetDialog(
     private fun initRecyclerview() {
         binding.bottomSheetRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.bottomSheetRecyclerView.adapter =
-            BottomSheetListAdapter(titleResList, iconResList, selectedPosition,redTintItemPosition) {
+            OptionsListAdapter(titleResList, iconResList, selectedPosition,redTintItemPosition) {
                 onOptionClick(titleResList[it])
                 dismiss()
             }
