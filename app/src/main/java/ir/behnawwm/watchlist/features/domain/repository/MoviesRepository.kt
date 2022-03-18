@@ -25,7 +25,7 @@ interface MoviesRepository {
     //todo add delete saved movie from db
     //todo check if suspend is needed
 
-    class Network
+    class MoviesRepositoryImpl
     @Inject constructor(
         private val networkHandler: NetworkHandler,
         private val service: MoviesService,

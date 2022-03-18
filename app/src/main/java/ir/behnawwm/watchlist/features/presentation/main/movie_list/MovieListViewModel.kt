@@ -36,7 +36,7 @@ class MovieListViewModel @Inject constructor(
     private val _savedMovies: MutableLiveData<Event<List<MovieView>>> = MutableLiveData()
     val savedMovies: LiveData<Event<List<MovieView>>> = _savedMovies
 
-    fun loadSavedMoviesList() =
+    fun loadSavedMoviesList() = //todo IMPORTANT get movies with pagination methods
         getAllSavedMovies(UseCase.None, viewModelScope) {
             it.fold(::handleFailure, ::handleSavedMoviesList)
         }
