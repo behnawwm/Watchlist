@@ -32,10 +32,8 @@ import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.core.utils.ui.OptionBottomSheetDialog
 import ir.behnawwm.watchlist.databinding.FragmentSavedBinding
 import ir.behnawwm.watchlist.databinding.ItemMovieBinding
-import ir.behnawwm.watchlist.databinding.ItemSavedMovieBinding
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieFailure
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
-import ir.behnawwm.watchlist.features.presentation.main.saved.SavedMovieListItem.Companion.IS_DRAG_ENABLED
 
 @AndroidEntryPoint
 class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.ItemSwipeCallback {
@@ -94,8 +92,8 @@ class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.I
             this
         )
             .withNotifyAllDrops(true)   //todo change
-//            .withSwipeLeft(80) // Width of delete button
-//            .withSwipeRight(160) // Width of archive and share buttons
+            .withSwipeLeft(80) // Width of delete button
+            .withSwipeRight(160) // Width of archive and share buttons
             .withSensitivity(10f)
             .withSurfaceThreshold(0.3f)
         touchHelper = ItemTouchHelper(touchCallback)
@@ -104,12 +102,7 @@ class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.I
         savedMoviesAdapter.addEventHook(object : ClickEventHook<SavedMovieListItem>() {
             override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
                 //return the views on which you want to bind this event
-                return if (viewHolder is BindingViewHolder<*>) {
-                    val binding = viewHolder.binding as ItemSavedMovieBinding
-                    binding.ivOptions
-                } else {
-                    null
-                }
+                return if (viewHolder is SavedMovieListItem.ViewHolder) viewHolder.ivOptions else null
             }
 
             override fun onClick(
@@ -196,10 +189,10 @@ class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.I
     }
 
     override fun itemSwiped(position: Int, direction: Int) {
-        TODO("Not yet implemented")
+        //todo
     }
 
     override fun itemUnswiped(position: Int) {
-        TODO("Not yet implemented")
+        //todo
     }
 }
