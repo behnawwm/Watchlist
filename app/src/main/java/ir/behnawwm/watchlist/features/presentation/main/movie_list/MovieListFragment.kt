@@ -54,7 +54,7 @@ class MovieListFragment : Fragment() {
             observeEvent(popularMovies, ::renderPopularMoviesList)
             observeEvent(topRatedMovies, ::renderTopRatedMoviesList)
             observeEvent(savedMovieStatus, ::renderSavedMovieStatus)
-            failure(failure, ::handleFailure)
+            failureEvent(failure, ::handleFailure)
         }
     }
 

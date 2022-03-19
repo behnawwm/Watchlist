@@ -66,7 +66,7 @@ class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.I
         with(viewModel) {
             observe(savedMovies, ::renderSavedMovies)
             observeEvent(savedMovieStatus, ::renderSavedMovieStatus)
-            failure(failure, ::handleFailure)
+            failureEvent(failure, ::handleFailure)
         }
     }
 
@@ -93,7 +93,7 @@ class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.I
         )
             .withNotifyAllDrops(true)   //todo change
             .withSwipeLeft(80) // Width of delete button
-            .withSwipeRight(160) // Width of archive and share buttons
+//            .withSwipeRight(160) // Width of archive and share buttons
             .withSensitivity(10f)
             .withSurfaceThreshold(0.3f)
         touchHelper = ItemTouchHelper(touchCallback)

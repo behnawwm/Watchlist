@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ir.behnawwm.watchlist.core.exception.Failure
+import ir.behnawwm.watchlist.core.functional.Event
 
 /**
  * Base ViewModel class with default Failure handling.
@@ -12,11 +13,11 @@ import ir.behnawwm.watchlist.core.exception.Failure
  */
 abstract class BaseViewModel : ViewModel() {
 
-    private val _failure: MutableLiveData<Failure> = MutableLiveData()
-    val failure: LiveData<Failure> = _failure
+    private val _failure: MutableLiveData<Event<Failure>> = MutableLiveData()
+    val failure: LiveData<Event<Failure>> = _failure
 
     protected fun handleFailure(failure: Failure) {
-        _failure.value = failure
+        _failure.value = Event(failure)
     }
 
 }

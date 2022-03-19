@@ -37,7 +37,7 @@ class MovieDetailsFragment : Fragment() {
         initializeView()
         with(viewModel) {
             observe(movieDetails, ::renderMovieDetails)
-            failure(failure, ::handleFailure)
+            failureEvent(failure, ::handleFailure)
         }
         showProgress()
         viewModel.loadMovieDetails(args.selectedMovieId)
