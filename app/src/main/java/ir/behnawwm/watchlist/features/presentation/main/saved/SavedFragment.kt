@@ -5,23 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
-import com.mikepenz.fastadapter.binding.BindingViewHolder
 import com.mikepenz.fastadapter.drag.ItemTouchCallback
 import com.mikepenz.fastadapter.drag.SimpleDragCallback
 import com.mikepenz.fastadapter.listeners.ClickEventHook
-import com.mikepenz.fastadapter.listeners.EventHook
-import com.mikepenz.fastadapter.listeners.TouchEventHook
-import com.mikepenz.fastadapter.select.SelectExtension
-import com.mikepenz.fastadapter.select.getSelectExtension
+import com.mikepenz.fastadapter.listeners.addClickListener
 import com.mikepenz.fastadapter.swipe.SimpleSwipeDrawerCallback
 import com.mikepenz.fastadapter.swipe_drag.SimpleSwipeDrawerDragCallback
 import com.mikepenz.fastadapter.utils.DragDropUtil
@@ -31,8 +25,6 @@ import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.core.utils.ui.OptionBottomSheetDialog
 import ir.behnawwm.watchlist.databinding.FragmentSavedBinding
-import ir.behnawwm.watchlist.databinding.ItemMovieBinding
-import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieFailure
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
 
 @AndroidEntryPoint
@@ -98,34 +90,25 @@ class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.I
             .withSurfaceThreshold(0.3f)
         touchHelper = ItemTouchHelper(touchCallback)
         touchHelper.attachToRecyclerView(binding.rvSavedMovies)
+        savedMoviesAdapter.addClickListener<SavedMovieListItem.ViewHolder, SavedMovieListItem>(
+            resolveView = { viewHolder ->
+                viewHolder.ivOptions
+            }, onClick = { view, position, adapter, item ->
+                showOptionsDialog(item, position)
+            })
+        savedMoviesAdapter.addClickListener<SavedMovieListItem.ViewHolder, SavedMovieListItem>(
+            resolveView = { viewHolder ->
+                viewHolder.ivDelete
+            }, onClick = { view, position, adapter, item ->
+                deleteMovie(item, position)
+            })
+        savedMoviesAdapter.addClickListener<SavedMovieListItem.ViewHolder, SavedMovieListItem>(
+            resolveView = { viewHolder ->
+                viewHolder.ivShare
+            }, onClick = { view, position, adapter, item ->
+                shareMovie(item, position)
+            })
 
-        savedMoviesAdapter.addEventHook(object : ClickEventHook<SavedMovieListItem>() {
-            override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
-                //return the views on which you want to bind this event
-                return if (viewHolder is SavedMovieListItem.ViewHolder) viewHolder.ivOptions else null
-            }
-
-            override fun onClick(
-                v: View,
-                position: Int,
-                fastAdapter: FastAdapter<SavedMovieListItem>,
-                item: SavedMovieListItem
-            ) {
-                OptionBottomSheetDialog(
-                    requireContext(),
-                    listOf(resources.getString(R.string.delete)),
-                    listOf(R.drawable.ic_delete),
-                    redTintItemPosition = listOf(0)
-                ) {
-                    when (it) {
-                        resources.getString(R.string.delete) -> {
-                            viewModel.deleteSavedMovie(savedMoviesAdapter.adapterItems[position].movie)
-                            savedMoviesAdapter.remove(position)
-                        }
-                    }
-                }.show()
-            }
-        })
         savedMoviesAdapter.apply {
             // Add an event hook that manages touching the drag handle
             addEventHook(
@@ -141,12 +124,35 @@ class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.I
             true
         }
 
-
-
         binding.rvSavedMovies.apply {
             adapter = savedMoviesAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+    }
+
+    private fun deleteMovie(item: SavedMovieListItem, position: Int) {
+        viewModel.deleteSavedMovie(item.movie)
+        savedMoviesAdapter.remove(position)
+    }
+
+    private fun shareMovie(item: SavedMovieListItem, position: Int) {
+        //todo share!
+        Toast.makeText(requireContext(), "Not Implemented!", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showOptionsDialog(item: SavedMovieListItem, position: Int) {
+        OptionBottomSheetDialog(
+            requireContext(),
+            listOf(resources.getString(R.string.delete)),
+            listOf(R.drawable.ic_delete),
+            redTintItemPosition = listOf(0)
+        ) {
+            when (it) {
+                resources.getString(R.string.delete) -> {
+                    deleteMovie(item,position)
+                }
+            }
+        }.show()
     }
 
     private fun renderSavedMovies(savedMovies: List<MovieView>?) {

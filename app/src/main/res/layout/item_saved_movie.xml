@@ -121,7 +121,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/ic_share"
+            android:id="@+id/ivShare"
             android:layout_width="wrap_content"
             android:background="@drawable/ic_share"
             android:backgroundTint="@color/white"

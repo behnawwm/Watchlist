@@ -63,6 +63,8 @@ class SavedMovieListItem(
         var tvRating: TextView = view.findViewById(R.id.tvRating)
         var tvMovieTitle: TextView = view.findViewById(R.id.tvMovieTitle)
         var ivOptions: ImageView = view.findViewById(R.id.ivOptions)
+        var ivDelete: ImageView = view.findViewById(R.id.ivDelete)
+        var ivShare: ImageView = view.findViewById(R.id.ivShare)
         var ivDrag: ImageView = view.findViewById(R.id.ivDrag)
         var layoutItemContent: View = view.findViewById(R.id.layout_item_content)
 
