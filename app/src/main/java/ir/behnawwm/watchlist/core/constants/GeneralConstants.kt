@@ -8,4 +8,6 @@ object GeneralConstants {
 
     const val TMDB_TOKEN = "29227321b612ab6cd44435b4403a2f63"
     const val TMDB_IMAGE_PREFIX = "https://image.tmdb.org/t/p/w500/"
+    const val TMDB_IMAGE_PREFIX_ORIGINAL = "https://image.tmdb.org/t/p/original/"
+    const val TMDB_IMAGE_PREFIX_W200 = "https://image.tmdb.org/t/p/w200/"
 }

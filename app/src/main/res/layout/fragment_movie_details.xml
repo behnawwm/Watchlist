@@ -97,18 +97,6 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 tools:text="3.5" />
 
-            <ir.behnawwm.watchlist.core.utils.ui.ReadMoreTextView
-                android:id="@+id/tvDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/darkGray"
-                app:layout_constraintTop_toBottomOf="@+id/rvGenres"
-                android:layout_marginTop="8dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                app:readMoreMaxLine="2"
-                tools:text="@string/lorem_ipsum" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvGenres"
                 android:layout_width="match_parent"
@@ -117,6 +105,42 @@
                 app:layout_constraintTop_toBottomOf="@+id/ivPoster"
                 tools:itemCount="1"
                 tools:listitem="@layout/item_movie_genre" />
+
+            <ir.behnawwm.watchlist.core.utils.ui.ReadMoreTextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="@color/darkGray"
+                app:layout_constraintTop_toBottomOf="@+id/rvGenres"
+                app:readMoreMaxLine="2"
+                tools:text="@string/lorem_ipsum" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/cast"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_movie_cast" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

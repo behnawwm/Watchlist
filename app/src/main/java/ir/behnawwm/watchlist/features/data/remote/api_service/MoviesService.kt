@@ -1,5 +1,7 @@
 package ir.behnawwm.watchlist.features.data.remote.api_service
 
+import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.credits.MovieCredits
+import retrofit2.Call
 import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -13,6 +15,8 @@ class MoviesService
 //    override fun movieDetails(movieId: Int) = moviesApi.movieDetails(movieId)
 
     override fun movieDetails(movieId: Int, token: String) = moviesApi.movieDetails(movieId, token)
+
+    override fun movieDetailsCredits(movieId: Int, token: String) = moviesApi.movieDetailsCredits(movieId,token)
 
     override fun popularMovies(token: String) = moviesApi.popularMovies(token)
 

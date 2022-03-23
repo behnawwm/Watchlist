@@ -1,6 +1,7 @@
 package ir.behnawwm.watchlist.features.data.remote.api_service
 
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.MovieDetails
+import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.credits.MovieCredits
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_list.TmdbPageResult
 import retrofit2.Call
 import retrofit2.http.GET
@@ -17,5 +18,8 @@ internal interface MoviesApi {
 
     @GET("3/movie/{id}")
     fun movieDetails(@Path("id") movieId: Int, @Query("api_key") token: String): Call<MovieDetails>
+
+    @GET("3/movie/{id}/credits")
+    fun movieDetailsCredits(@Path("id") movieId: Int, @Query("api_key") token: String): Call<MovieCredits>
 
 }

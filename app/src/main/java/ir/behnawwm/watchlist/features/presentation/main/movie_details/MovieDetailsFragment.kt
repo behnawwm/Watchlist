@@ -17,6 +17,8 @@ import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.databinding.FragmentMovieDetailsBinding
+import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.credits.MovieCredits
+import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieCastListItem
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieFailure
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieGenreListItem
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieListFragmentDirections
@@ -28,6 +30,7 @@ class MovieDetailsFragment : Fragment() {
     private val args: MovieDetailsFragmentArgs by navArgs()
 
     private lateinit var genresAdapter: FastItemAdapter<MovieGenreListItem>
+    private lateinit var castAdapter: FastItemAdapter<MovieCastListItem>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,19 +47,35 @@ class MovieDetailsFragment : Fragment() {
         initializeView()
         with(viewModel) {
             observe(movieDetails, ::renderMovieDetails)
+            observe(movieCredits, ::renderMovieCredits)
             failureEvent(failure, ::handleFailure)
         }
         showProgress()
-        viewModel.loadMovieDetails(args.selectedMovieId)
+        viewModel.loadAll(args.selectedMovieId)
     }
+
     private fun initializeView() {
         initializeGenresList()
+        initializeCastList()
         binding.apply {
             btnBack.setOnClickListener {
                 close()
             }
             btnSave.setOnClickListener {
                 //todo
+            }
+        }
+    }
+
+    private fun initializeCastList() {
+        binding.rvCast.apply {
+            castAdapter = FastItemAdapter()
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = castAdapter
+            castAdapter.onClickListener = { view, adapter, item, position ->
+                //todo navigate to movies with selected cast
+                true
             }
         }
     }
@@ -86,6 +105,13 @@ class MovieDetailsFragment : Fragment() {
                     genresAdapter.set(movieDetails.genres.map { MovieGenreListItem(it) })
                 }
             }
+        }
+        hideProgress()
+    }
+
+    private fun renderMovieCredits(movieCredits: MovieCreditsView?) {
+        movieCredits?.let {
+            castAdapter.set(movieCredits.cast.map { MovieCastListItem(it) })
         }
         hideProgress()
     }
