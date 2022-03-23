@@ -1,7 +1,7 @@
 package ir.behnawwm.watchlist.features.domain.use_case
 
 import ir.behnawwm.watchlist.core.interactor.UseCase
-import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.TmdbPageResult
+import ir.behnawwm.watchlist.features.data.remote.dto.movie_list.TmdbPageResult
 import ir.behnawwm.watchlist.features.domain.repository.MoviesRepository
 import javax.inject.Inject
 

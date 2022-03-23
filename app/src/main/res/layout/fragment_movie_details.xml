@@ -97,18 +97,26 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 tools:text="3.5" />
 
-            <TextView
+            <ir.behnawwm.watchlist.core.utils.ui.ReadMoreTextView
                 android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
                 android:textColor="@color/darkGray"
-                app:layout_constraintTop_toBottomOf="@+id/ivPoster"
-                tools:layout_editor_absoluteX="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/rvGenres"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                app:readMoreMaxLine="2"
                 tools:text="@string/lorem_ipsum" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvGenres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/ivPoster"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_movie_genre" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

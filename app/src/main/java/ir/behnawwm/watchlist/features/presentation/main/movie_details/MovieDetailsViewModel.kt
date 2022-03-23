@@ -36,7 +36,8 @@ class MovieDetailsViewModel @Inject constructor(
             movie.overview,
             movie.overview,
             movie.budget,
-            movie.overview
+            movie.overview,
+            movie.genres
         )
     }
 }

@@ -9,7 +9,7 @@ import ir.behnawwm.watchlist.features.data.database.dao.MoviesDao
 import ir.behnawwm.watchlist.features.data.database.entity.MovieEntity
 import ir.behnawwm.watchlist.features.data.remote.api_service.MoviesService
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.MovieDetails
-import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.TmdbPageResult
+import ir.behnawwm.watchlist.features.data.remote.dto.movie_list.TmdbPageResult
 import retrofit2.Call
 import java.lang.Exception
 import javax.inject.Inject

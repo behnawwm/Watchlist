@@ -90,6 +90,7 @@ class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.I
             .withSurfaceThreshold(0.3f)
         touchHelper = ItemTouchHelper(touchCallback)
         touchHelper.attachToRecyclerView(binding.rvSavedMovies)
+
         savedMoviesAdapter.addClickListener<SavedMovieListItem.ViewHolder, SavedMovieListItem>(
             resolveView = { viewHolder ->
                 viewHolder.ivOptions
@@ -109,17 +110,16 @@ class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.I
                 shareMovie(item, position)
             })
 
-        savedMoviesAdapter.apply {
-            // Add an event hook that manages touching the drag handle
-            addEventHook(
-                DragHandleTouchEvent { position ->
-                    binding.rvSavedMovies.findViewHolderForAdapterPosition(position)
-                        ?.let { viewHolder ->
-                            touchHelper.startDrag(viewHolder)
-                        }
-                }
-            )
-        }
+        // Add an event hook that manages touching the drag handle
+        savedMoviesAdapter.addEventHook(
+            DragHandleTouchEvent { position ->
+                binding.rvSavedMovies.findViewHolderForAdapterPosition(position)
+                    ?.let { viewHolder ->
+                        touchHelper.startDrag(viewHolder)
+                    }
+            }
+        )
+
         savedMoviesAdapter.onLongClickListener = { view, adapter, item, position ->
             true
         }
@@ -136,7 +136,7 @@ class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.I
     }
 
     private fun shareMovie(item: SavedMovieListItem, position: Int) {
-        //todo share!
+        //todo Feature share!
         Toast.makeText(requireContext(), "Not Implemented!", Toast.LENGTH_SHORT).show()
     }
 

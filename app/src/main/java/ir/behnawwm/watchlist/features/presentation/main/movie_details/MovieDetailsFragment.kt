@@ -6,21 +6,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
+import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.databinding.FragmentMovieDetailsBinding
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieFailure
+import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieGenreListItem
+import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieListFragmentDirections
 
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
     private lateinit var binding: FragmentMovieDetailsBinding
     private val viewModel: MovieDetailsViewModel by viewModels()
     private val args: MovieDetailsFragmentArgs by navArgs()
+
+    private lateinit var genresAdapter: FastItemAdapter<MovieGenreListItem>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +50,7 @@ class MovieDetailsFragment : Fragment() {
         viewModel.loadMovieDetails(args.selectedMovieId)
     }
     private fun initializeView() {
+        initializeGenresList()
         binding.apply {
             btnBack.setOnClickListener {
                 close()
@@ -53,18 +61,29 @@ class MovieDetailsFragment : Fragment() {
         }
     }
 
-    private fun renderMovieDetails(movie: MovieDetailsView?) {
+    private fun initializeGenresList() {
+        binding.rvGenres.apply {
+            genresAdapter = FastItemAdapter()
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = genresAdapter
+            genresAdapter.onClickListener = { view, adapter, item, position ->
+                //todo navigate to movies with selected genre
+                true
+            }
+        }
+    }
+
+    private fun renderMovieDetails(movieDetails: MovieDetailsView?) {
         binding.apply {
-            movie?.let {
-                with(movie) {
+            movieDetails?.let {
+                with(movieDetails) {
                     ivPoster.load(poster)
                     tvMovieTitle.text = title
                     tvDescription.text = summary
                     tvRating.text = rating.toString()
-//                    movieCast.text = cast
-//                    movieDirector.text = director
-//                    movieYear.text = year.toString()
-//                    moviePlay.setOnClickListener { movieDetailsViewModel.playMovie(trailer) }
+
+                    genresAdapter.set(movieDetails.genres.map { MovieGenreListItem(it) })
                 }
             }
         }

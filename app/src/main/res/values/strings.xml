@@ -24,4 +24,5 @@
     <string name="view">View</string>
     <string name="movie_removed_from_watchlist">Movie removed from your watchlist</string>
     <string name="delete">Delete</string>
+    <string name="read_more">… Read More</string>
 </resources>

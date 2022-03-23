@@ -1,6 +1,4 @@
-package ir.behnawwm.watchlist.features.data.remote.dto.popular_movies
-
-import ir.behnawwm.watchlist.core.constants.GeneralConstants
+package ir.behnawwm.watchlist.features.data.remote.dto.movie_list
 
 data class TmdbMovie(
     val adult: Boolean,

@@ -1,7 +1,7 @@
 package ir.behnawwm.watchlist.features.data.remote.api_service
 
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.MovieDetails
-import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.TmdbPageResult
+import ir.behnawwm.watchlist.features.data.remote.dto.movie_list.TmdbPageResult
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -1,4 +1,4 @@
-package ir.behnawwm.watchlist.features.data.remote.dto.popular_movies
+package ir.behnawwm.watchlist.features.data.remote.dto.movie_list
 
 
 data class TmdbPageResult(

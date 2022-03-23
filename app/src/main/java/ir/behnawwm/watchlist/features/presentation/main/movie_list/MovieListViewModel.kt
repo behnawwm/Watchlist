@@ -9,7 +9,7 @@ import ir.behnawwm.watchlist.core.functional.Event
 import ir.behnawwm.watchlist.core.interactor.UseCase
 import ir.behnawwm.watchlist.core.platform.BaseViewModel
 import ir.behnawwm.watchlist.features.data.database.entity.MovieEntity
-import ir.behnawwm.watchlist.features.data.remote.dto.popular_movies.TmdbPageResult
+import ir.behnawwm.watchlist.features.data.remote.dto.movie_list.TmdbPageResult
 import ir.behnawwm.watchlist.features.domain.use_case.*
 import javax.inject.Inject
 
