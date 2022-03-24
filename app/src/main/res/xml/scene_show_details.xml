@@ -34,7 +34,7 @@
                 app:framePosition="20"
                 app:keyPositionType="deltaRelative"
                 app:percentY="0.51"
-                app:motionTarget="@id/details_poster" />
+                app:motionTarget="@id/ivPoster" />
 
             <!-- This looks weird. We need a quick change from elevated to not-so-elevated at 20% so we set 2 key
                  attributes, one at 20% and other at 25%. -->
@@ -43,12 +43,12 @@
                 android:rotation="45"
                 android:rotationY="15"
                 app:framePosition="20"
-                app:motionTarget="@id/details_poster" />
+                app:motionTarget="@id/ivPoster" />
 
             <KeyAttribute
                 android:elevation="@dimen/details_poster_not_elevation"
                 app:framePosition="25"
-                app:motionTarget="@id/details_poster" />
+                app:motionTarget="@id/ivPoster" />
 
             <!-- Only elevate the appbar background over the last 25% -->
             <KeyAttribute
@@ -96,22 +96,22 @@
             android:id="@id/details_appbar_background"
             android:layout_width="0dp"
             android:layout_height="88dp"
-            app:layout_constraintBottom_toBottomOf="@id/details_poster"
+            app:layout_constraintBottom_toBottomOf="@id/ivPoster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Constraint
-            android:id="@id/details_title"
+            android:id="@id/tvMovieTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             app:layout_constraintBottom_toTopOf="@id/details_appbar_background"
             app:layout_constraintEnd_toEndOf="@id/details_appbar_background"
-            app:layout_constraintStart_toEndOf="@id/details_poster"
+            app:layout_constraintStart_toEndOf="@id/ivPoster"
             app:layout_constraintTop_toBottomOf="@id/details_appbar_background" />
 
         <Constraint
-            android:id="@id/details_poster"
+            android:id="@id/ivPoster"
             android:layout_width="80dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/padding_normal"
@@ -165,7 +165,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@id/details_title"
+            android:id="@id/tvMovieTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
@@ -177,12 +177,12 @@
             app:layout_constraintTop_toTopOf="@id/details_appbar_background" />
 
         <Constraint
-            android:id="@id/details_poster"
+            android:id="@id/ivPoster"
             android:layout_width="72dp"
             android:layout_height="0dp"
             android:elevation="@dimen/details_poster_not_elevation"
             app:layout_constraintDimensionRatio="h,1:1.5"
-            app:layout_constraintStart_toStartOf="@id/details_title"
+            app:layout_constraintStart_toStartOf="@id/tvMovieTitle"
             app:layout_constraintTop_toTopOf="parent" />
 
     </ConstraintSet>

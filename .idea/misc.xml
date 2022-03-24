@@ -30,7 +30,7 @@
         <entry key="app/src/main/res/layout/bottom_sheet_list_item.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/layout/fragment_movie_details.xml" value="0.23278163374265884" />
-        <entry key="app/src/main/res/layout/fragment_movie_details2.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_movie_details2.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_movie_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_saved.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.33" />
@@ -40,9 +40,13 @@
         <entry key="app/src/main/res/layout/item_movie_genre.xml" value="0.21331521739130435" />
         <entry key="app/src/main/res/layout/item_saved_movie.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_searched_movie.xml" value="0.33106884057971014" />
+        <entry key="app/src/main/res/layout/layout_menu_save۲.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/layout/menu_save.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/menu/details_menu.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/menu/menu_details.xml" value="0.2140625" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.234" />
       </map>
     </option>

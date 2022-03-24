@@ -1,23 +1,23 @@
 package ir.behnawwm.watchlist.features.presentation.main.movie_details
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.CompoundButton
+import android.widget.Switch
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import coil.load
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
+import com.varunest.sparkbutton.SparkButton
 import dagger.hilt.android.AndroidEntryPoint
 import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.databinding.FragmentMovieDetails2Binding
-import ir.behnawwm.watchlist.databinding.FragmentMovieDetailsBinding
-import ir.behnawwm.watchlist.features.presentation.main.MainActivity
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieCastListItem
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieFailure
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieGenreListItem
@@ -25,7 +25,7 @@ import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieGenreLis
 
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
-    private lateinit var binding: FragmentMovieDetailsBinding
+    private lateinit var binding: FragmentMovieDetails2Binding
     private val viewModel: MovieDetailsViewModel by viewModels()
     private val args: MovieDetailsFragmentArgs by navArgs()
 
@@ -37,7 +37,7 @@ class MovieDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMovieDetailsBinding.inflate(layoutInflater)
+        binding = FragmentMovieDetails2Binding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -59,22 +59,23 @@ class MovieDetailsFragment : Fragment() {
         initializeGenresList()
         initializeCastList()
         binding.apply {
-            btnBack.setOnClickListener {
-                close()
-            }
-            btnSave.setOnClickListener {
-                //todo
-            }
+//            btnBack.setOnClickListener {
+//                close()
+//            }
+//            btnSave.setOnClickListener {
+//                //todo
+//            }
         }
     }
 
     private fun initializeToolbar() {
-        binding.apply {
-//            (requireActivity() as MainActivity).setSupportActionBar(toolbar)
-//            collapsingToolbar.title = "Test Title"
-//            collapsingToolbar.setCollapsedTitleTextAppearance(R.style.coll_toolbar_title)
-//            collapsingToolbar.setExpandedTitleTextAppearance(R.style.exp_toolbar_title)
-//            collapsingToolbar.setContentScrimColor(Color.GREEN)
+        with(requireActivity() as AppCompatActivity) {
+            setupActionBar(binding.detailsToolbar) {
+                setDisplayShowTitleEnabled(false)
+                setDisplayHomeAsUpEnabled(true)
+                setDisplayShowHomeEnabled(true)
+                setHasOptionsMenu(true)
+            }
         }
     }
 
@@ -143,6 +144,33 @@ class MovieDetailsFragment : Fragment() {
             }
         }
         hideProgress()
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_details, menu)
+
+        val actionView = menu.findItem(R.id.menu_save).actionView as SparkButton
+        actionView.setOnClickListener {
+            //todo save
+            actionView.isChecked = !actionView.isChecked
+        }
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    var flag = true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().popBackStack()
+                return true
+            }
+            R.id.menu_save -> {
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

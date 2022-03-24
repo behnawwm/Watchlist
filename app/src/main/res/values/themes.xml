@@ -16,6 +16,7 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="android:navigationBarColor">@color/black</item>
         <item name="android:fontFamily">@font/font_poppins</item>
+        <item name="android:textColor">@android:color/white</item>
 
         <!--        BottomSheet     -->
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
@@ -49,7 +50,6 @@
     </style>
 
     <style name="CustomTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/colorTextSecondary</item>
         <item name="android:textStyle">bold</item>
@@ -116,7 +116,6 @@
     </style>
 
     <style name="TmdbMargin.Small">
-        <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:layout_marginTop">@dimen/padding_micro</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
     </style>
@@ -127,7 +126,6 @@
     </style>
 
     <style name="TmdbMargin.Body">
-        <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:clickable">true</item>
         <item name="android:ellipsize">end</item>

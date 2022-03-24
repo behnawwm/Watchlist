@@ -71,10 +71,9 @@ class MovieListFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = popularMoviesAdapter
             popularMoviesAdapter.onClickListener = { view, adapter, item, position ->
-//                val action =
-//                    MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.movie.id)
-//                findNavController().navigate(action)
-                findNavController().navigate(R.id.action_movieListFragment_to_movieDetailsFragment2)
+                val action =
+                    MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.movie.id)
+                findNavController().navigate(action)
                 true
             }
         }

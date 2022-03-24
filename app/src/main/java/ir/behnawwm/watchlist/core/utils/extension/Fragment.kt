@@ -3,6 +3,9 @@ package ir.behnawwm.watchlist.core.utils.extension
 import android.content.Context
 import android.view.View
 import androidx.annotation.StringRes
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -42,4 +45,11 @@ fun Fragment.notifyWithAction(
     snackBar.setActionTextColor(ContextCompat.getColor(appContext, R.color.colorTextPrimary))
     snackBar.duration = Snackbar.LENGTH_SHORT
     snackBar.show()
+}
+
+fun AppCompatActivity.setupActionBar(toolbar : Toolbar, action: ActionBar.() -> Unit) {
+    setSupportActionBar(toolbar)
+    supportActionBar?.run {
+        action()
+    }
 }
