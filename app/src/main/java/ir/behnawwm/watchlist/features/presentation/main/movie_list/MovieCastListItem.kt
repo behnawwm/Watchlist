@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import coil.load
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import ir.behnawwm.watchlist.R
+import ir.behnawwm.watchlist.core.utils.extension.loadImage
 import ir.behnawwm.watchlist.databinding.ItemMovieCastBinding
 import ir.behnawwm.watchlist.databinding.ItemMovieGenreBinding
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.Genre
@@ -25,7 +26,7 @@ class MovieCastListItem(
         binding.apply {
             tvNameCast.text = cast.name
             tvCharacterCast.text = cast.character
-            ivProfileCast.load(cast.profileImage)
+            ivProfileCast.loadImage(cast.profileImage)
         }
     }
 

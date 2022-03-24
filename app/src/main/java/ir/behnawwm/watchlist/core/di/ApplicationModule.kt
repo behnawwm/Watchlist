@@ -2,6 +2,10 @@ package ir.behnawwm.watchlist.core.di
 
 import android.app.Application
 import androidx.room.Room
+import coil.ImageLoader
+import coil.annotation.ExperimentalCoilApi
+import coil.disk.DiskCache
+import coil.memory.MemoryCache
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,6 +59,7 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideMoviesRepository(dataSource: MoviesRepository.MoviesRepositoryImpl): MoviesRepository = dataSource
+    fun provideMoviesRepository(dataSource: MoviesRepository.MoviesRepositoryImpl): MoviesRepository =
+        dataSource
 
 }

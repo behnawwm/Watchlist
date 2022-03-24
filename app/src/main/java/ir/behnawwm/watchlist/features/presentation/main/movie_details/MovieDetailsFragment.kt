@@ -108,7 +108,7 @@ class MovieDetailsFragment : Fragment() {
         binding.apply {
             movieDetails?.let {
                 with(movieDetails) {
-                    ivPoster.load(poster)
+                    ivPoster.loadImage(poster)
                     tvMovieTitle.text = title
                     tvDescription.text = summary
                     tvRating.text = rating.toString()

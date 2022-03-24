@@ -5,12 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import coil.load
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import com.mikepenz.fastadapter.items.AbstractItem
 import ir.behnawwm.watchlist.R
+import ir.behnawwm.watchlist.core.utils.extension.loadImage
 import ir.behnawwm.watchlist.databinding.ItemMovieBinding
 
 class MovieListItem(
@@ -26,7 +26,7 @@ class MovieListItem(
 
     override fun bindView(binding: ItemMovieBinding, payloads: List<Any>) {
         binding.apply {
-            ivMoviePoster.load(movie.poster)
+            ivMoviePoster.loadImage(movie.poster)
             tvMovieTitle.text = movie.title
             tvRating.text = movie.rating.toString()
             sbSave.isChecked = movie.isSaved
