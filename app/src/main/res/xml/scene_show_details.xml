@@ -62,7 +62,7 @@
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:id="@id/details_backdrop"
+            android:id="@id/ivPosterBackdrop"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@id/details_appbar_background"
@@ -72,10 +72,10 @@
 
         <Constraint
             android:id="@id/details_backdrop_scrim"
-            app:layout_constraintBottom_toBottomOf="@id/details_backdrop"
-            app:layout_constraintEnd_toEndOf="@id/details_backdrop"
-            app:layout_constraintStart_toStartOf="@id/details_backdrop"
-            app:layout_constraintTop_toTopOf="@id/details_backdrop">
+            app:layout_constraintBottom_toBottomOf="@id/ivPosterBackdrop"
+            app:layout_constraintEnd_toEndOf="@id/ivPosterBackdrop"
+            app:layout_constraintStart_toStartOf="@id/ivPosterBackdrop"
+            app:layout_constraintTop_toTopOf="@id/ivPosterBackdrop">
 
             <CustomAttribute
                 app:attributeName="background"
@@ -125,7 +125,7 @@
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@id/details_backdrop"
+            android:id="@id/ivPosterBackdrop"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@id/details_appbar_background"
@@ -135,10 +135,10 @@
 
         <Constraint
             android:id="@id/details_backdrop_scrim"
-            app:layout_constraintBottom_toBottomOf="@id/details_backdrop"
-            app:layout_constraintEnd_toEndOf="@id/details_backdrop"
-            app:layout_constraintStart_toStartOf="@id/details_backdrop"
-            app:layout_constraintTop_toTopOf="@id/details_backdrop">
+            app:layout_constraintBottom_toBottomOf="@id/ivPosterBackdrop"
+            app:layout_constraintEnd_toEndOf="@id/ivPosterBackdrop"
+            app:layout_constraintStart_toStartOf="@id/ivPosterBackdrop"
+            app:layout_constraintTop_toTopOf="@id/ivPosterBackdrop">
 
             <CustomAttribute
                 app:attributeName="background"

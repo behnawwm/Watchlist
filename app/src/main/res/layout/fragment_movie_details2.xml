@@ -9,31 +9,31 @@
 
 
     <ImageView
-        android:id="@+id/details_backdrop"
+        android:id="@+id/ivPosterBackdrop"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/sample_movie_poster"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/sample_movie_poster" />
 
     <View
         android:id="@+id/details_backdrop_scrim"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/details_backdrop"
-        app:layout_constraintEnd_toEndOf="@id/details_backdrop"
-        app:layout_constraintStart_toStartOf="@id/details_backdrop"
-        app:layout_constraintTop_toTopOf="@id/details_backdrop" />
+        app:layout_constraintBottom_toBottomOf="@id/ivPosterBackdrop"
+        app:layout_constraintEnd_toEndOf="@id/ivPosterBackdrop"
+        app:layout_constraintStart_toStartOf="@id/ivPosterBackdrop"
+        app:layout_constraintTop_toTopOf="@id/ivPosterBackdrop" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivPoster"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/placeholder"
+        android:background="@color/shimmerColor"
         android:scaleType="centerCrop"
         android:transformPivotX="0px"
         android:transformPivotY="0px"
-        android:src="@drawable/sample_movie_poster" />
+        tools:src="@drawable/sample_movie_poster" />
 
     <!-- Needed to fill a rounding error gap in MotionLayout. See https://issuetracker.google.com/112728689 -->
     <View

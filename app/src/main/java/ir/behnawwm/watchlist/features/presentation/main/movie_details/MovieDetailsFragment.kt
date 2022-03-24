@@ -110,6 +110,7 @@ class MovieDetailsFragment : Fragment() {
             movieDetails?.let {
                 with(movieDetails) {
                     ivPoster.loadImage(poster)
+                    ivPosterBackdrop.loadImage(poster)
                     tvMovieTitle.text = title
                     tvDescription.text = summary
                     tvRating.text = rating.toString()
