@@ -18,6 +18,8 @@ class MoviesService
 
     override fun movieDetailsCredits(movieId: Int, token: String) = moviesApi.movieDetailsCredits(movieId,token)
 
+    override fun searchMovie(token: String, query: String)= moviesApi.searchMovie(token,query)
+
     override fun popularMovies(token: String) = moviesApi.popularMovies(token)
 
     override fun topRatedMovies(token: String) = moviesApi.topRatedMovies(token)

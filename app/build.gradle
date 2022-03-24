@@ -60,7 +60,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     //Lottie
-    implementation 'com.airbnb.android:lottie:4.2.2'
+    implementation 'com.airbnb.android:lottie:5.0.3'
 
     // FastAdapter
     def latestFastAdapterRelease = '5.4.1'

@@ -11,6 +11,7 @@ import ir.behnawwm.watchlist.features.data.remote.api_service.MoviesService
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.MovieDetails
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.credits.MovieCredits
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_list.TmdbPageResult
+import ir.behnawwm.watchlist.features.data.remote.dto.search_movie.MovieSearchResponse
 import retrofit2.Call
 import java.lang.Exception
 import javax.inject.Inject
@@ -20,6 +21,7 @@ interface MoviesRepository {
     fun movieDetailsCredits(movieId: Int): Either<Failure, MovieCredits>
     fun popularMovies(): Either<Failure, TmdbPageResult>
     fun topRatedMovies(): Either<Failure, TmdbPageResult>
+    fun searchMovie(query: String): Either<Failure, MovieSearchResponse>
 
     suspend fun insertSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None>
     suspend fun deleteSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None>
@@ -73,6 +75,17 @@ interface MoviesRepository {
                     service.topRatedMovies(GeneralConstants.TMDB_TOKEN),
                     { it },
                     TmdbPageResult.empty
+                )
+                false -> Either.Left(Failure.NetworkConnection)
+            }
+        }
+
+        override fun searchMovie(query: String): Either<Failure, MovieSearchResponse> {
+            return when (networkHandler.isNetworkAvailable()) {
+                true -> request(
+                    service.searchMovie(GeneralConstants.TMDB_TOKEN, query),
+                    { it },
+                    MovieSearchResponse.empty
                 )
                 false -> Either.Left(Failure.NetworkConnection)
             }

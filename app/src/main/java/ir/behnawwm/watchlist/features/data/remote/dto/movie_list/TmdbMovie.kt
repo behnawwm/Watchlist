@@ -1,5 +1,8 @@
 package ir.behnawwm.watchlist.features.data.remote.dto.movie_list
 
+import ir.behnawwm.watchlist.core.constants.GeneralConstants
+import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
+
 data class TmdbMovie(
     val adult: Boolean,
     val backdrop_path: String,
@@ -16,5 +19,5 @@ data class TmdbMovie(
     val vote_average: Double,
     val vote_count: Int
 ){
-//    fun toMovie() = Movie(id,GeneralConstants.TMDB_IMAGE_PREFIX + poster_path)
+    fun toMovieView() = MovieView(id, GeneralConstants.TMDB_IMAGE_PREFIX + poster_path,title,vote_average,false)
 }

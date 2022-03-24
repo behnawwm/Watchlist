@@ -43,7 +43,11 @@
         android:id="@+id/searchFragment"
         android:name="ir.behnawwm.watchlist.features.presentation.main.search.SearchFragment"
         android:label="SearchFragment"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
     <action
         android:id="@+id/action_global_savedFragment"
         app:destination="@id/savedFragment" />
