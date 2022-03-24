@@ -56,8 +56,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:ellipsize="end"
-        android:paddingTop="4dp"
         android:maxLines="2"
+        android:paddingTop="4dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="120dp"
@@ -83,8 +83,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp">
 
             <ImageView
                 android:id="@+id/imageView"
@@ -117,13 +117,24 @@
                 tools:itemCount="1"
                 tools:listitem="@layout/item_movie_genre" />
 
+            <TextView
+                android:id="@+id/tvSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/summary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/rvGenres" />
+
             <ir.behnawwm.watchlist.core.utils.ui.ReadMoreTextView
                 android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:padding="8dp"
                 android:textColor="@color/darkGray"
-                app:layout_constraintTop_toBottomOf="@+id/rvGenres"
+                app:layout_constraintTop_toBottomOf="@+id/tvSummary"
                 app:readMoreMaxLine="2"
                 tools:text="@string/lorem_ipsum" />
 
@@ -134,7 +145,6 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/cast"
-                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
