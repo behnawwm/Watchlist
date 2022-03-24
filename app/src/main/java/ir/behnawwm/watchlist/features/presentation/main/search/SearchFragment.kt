@@ -10,12 +10,14 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import ir.behnawwm.watchlist.R
+import ir.behnawwm.watchlist.core.constants.GeneralConstants.SEARCH_DEBOUNCE_DELAY_TIME
 import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.databinding.FragmentSearchBinding
@@ -23,6 +25,9 @@ import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieFailure
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieListFragmentDirections
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieListItem
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
@@ -30,6 +35,7 @@ class SearchFragment : Fragment() {
     private val viewModel: SearchFragmentViewModel by viewModels()
 
     private lateinit var searchedMoviesAdapter: FastItemAdapter<SearchMovieListItem>
+    private var searchJob: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +50,6 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initializeView()
-//        loadSavedMoviesList()
         initObservers()
     }
 
@@ -77,7 +82,7 @@ class SearchFragment : Fragment() {
             }
 
             override fun onTextChanged(query: CharSequence?, start: Int, before: Int, count: Int) {
-                loadSavedMoviesList(query.toString())
+                searchDebounced(query.toString())
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -85,6 +90,13 @@ class SearchFragment : Fragment() {
             }
 
         })
+    }
+    fun searchDebounced(searchText: String) {   //todo should it be moved to viewmodel ?
+        searchJob?.cancel()
+        searchJob = lifecycleScope.launch {
+            delay(SEARCH_DEBOUNCE_DELAY_TIME)
+            loadSavedMoviesList(searchText)
+        }
     }
 
     private fun initSearchedMoviesList() {
