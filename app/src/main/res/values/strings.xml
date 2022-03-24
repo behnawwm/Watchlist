@@ -27,4 +27,5 @@
     <string name="read_more">… Read More</string>
     <string name="cast">Cast</string>
     <string name="movie_tv_show_or_person">Movie, TV Show or Person</string>
+    <string name="summary">Summary</string>
 </resources>

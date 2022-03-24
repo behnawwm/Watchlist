@@ -6,4 +6,10 @@
         <attr name="readMoreText" format="string|reference" />
         <attr name="readMoreColor" format="color|reference" />
     </declare-styleable>
+
+    <declare-styleable name="TopLeftCutoutBackgroundView">
+        <attr name="topLeftCutSize" format="dimension" />
+        <attr name="backgroundColor" format="color" />
+    </declare-styleable>
+
 </resources>

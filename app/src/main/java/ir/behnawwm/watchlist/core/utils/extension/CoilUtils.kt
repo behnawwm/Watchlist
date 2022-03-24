@@ -7,6 +7,7 @@ import coil.annotation.ExperimentalCoilApi
 import coil.disk.DiskCache
 import coil.imageLoader
 import coil.memory.MemoryCache
+import ir.behnawwm.watchlist.R
 
 /**
  * A class that holds the singleton [ImageLoader] instance.
@@ -44,6 +45,8 @@ object CoilUtils {
         // Create a new ImageLoader.
         val newImageLoader = ImageLoader.Builder(context)
             .crossfade(true)
+            .placeholder(R.color.shimmerColor)
+            .error(R.drawable.error_placeholder)
             .memoryCache {
                 MemoryCache.Builder(context)
                     .maxSizePercent(0.25)

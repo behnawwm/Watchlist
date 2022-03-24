@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_movieListFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_movieListFragment_to_movieDetailsFragment2"
+            app:destination="@id/movieDetailsFragment2" />
 
     </fragment>
     <fragment
@@ -57,4 +60,9 @@
     <action
         android:id="@+id/action_global_movieListFragment"
         app:destination="@id/movieListFragment" />
+    <fragment
+        android:id="@+id/movieDetailsFragment2"
+        android:name="ir.behnawwm.watchlist.features.presentation.main.movie_details.MovieDetailsFragment2"
+        android:label="MovieDetailsFragment2"
+        />
 </navigation>

@@ -1,162 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/details_motion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    app:layoutDescription="@xml/scene_show_details">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbarlayout"
+
+    <ImageView
+        android:id="@+id/details_backdrop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sample_movie_poster"
+        tools:ignore="ContentDescription" />
+
+    <View
+        android:id="@+id/details_backdrop_scrim"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/details_backdrop"
+        app:layout_constraintEnd_toEndOf="@id/details_backdrop"
+        app:layout_constraintStart_toStartOf="@id/details_backdrop"
+        app:layout_constraintTop_toTopOf="@id/details_backdrop" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/details_poster"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/placeholder"
+        android:scaleType="centerCrop"
+        android:transformPivotX="0px"
+        android:transformPivotY="0px"
+        android:src="@drawable/sample_movie_poster" />
+
+    <!-- Needed to fill a rounding error gap in MotionLayout. See https://issuetracker.google.com/112728689 -->
+    <View
+        android:id="@+id/details_gap_filler"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
-        <!--todo apply this-->
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="@color/red"
-            app:expandedTitleGravity="top"
-            app:expandedTitleMarginEnd="64dp"
-            app:expandedTitleMarginStart="48dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        android:layout_height="2px"
+        android:background="@color/window_background"
+        app:layout_constraintBottom_toTopOf="@id/details_rv"
+        tools:ignore="PxUsage" />
 
+    <ir.behnawwm.watchlist.core.utils.ui.TopLeftCutoutBackgroundView
+        android:id="@+id/details_appbar_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:backgroundColor="@color/window_background"
+        app:topLeftCutSize="@dimen/details_corner_cutout" />
 
-            <ImageView
-                android:id="@+id/ivPoster"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/sample_movie_poster"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.7" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/details_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ellipsize="end"
+        android:text="@{tmdbItem.name}"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:title="sample"
-                app:titleTextColor="@color/white" />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-
-    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/details_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/Toolbar" />
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:id="@+id/details_rv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/window_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/details_appbar_background">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:elevation="4dp"
-                android:src="@drawable/ic_back"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/btnSave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:elevation="4dp"
-                android:src="@drawable/ic_save"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvMovieTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Sample Movie Title" />
-
-            <ImageView
-                android:id="@+id/imageView"
+                style="@style/TmdbMargin.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/ic_star_active"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvRating" />
+                android:layout_marginTop="@dimen/padding_normal"
+                android:text="@{@string/release_date(tmdbItem.releaseDate)}"
+                />
 
             <TextView
-                android:id="@+id/tvRating"
+                style="@style/TmdbMargin.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:includeFontPadding="false"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
-                tools:text="3.5" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvGenres"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tvRating"
-                tools:itemCount="1"
-                tools:listitem="@layout/item_movie_genre" />
-
-            <ir.behnawwm.watchlist.core.utils.ui.ReadMoreTextView
-                android:id="@+id/tvDescription"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/darkGray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvGenres"
-                app:readMoreMaxLine="2"
-                tools:text="@string/lorem_ipsum" />
+                android:text="@{@string/rating(tmdbItem.voteAverage)}"
+                />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/summary_label"
+                style="@style/TmdbMargin.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:text="@string/summary" />
+
+            <TextView
+                android:id="@+id/summary"
+                style="@style/TmdbMargin.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{tmdbItem.overview}" />
+
+<!--            <include-->
+<!--                layout="@layout/trailers"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="@dimen/padding_normal"-->
+<!--                android:layout_marginTop="@dimen/padding_large"-->
+<!--                app:vm="@{vm}"-->
+<!--                tools:ignore="RtlHardcoded" />-->
+
+            <TextView
+                style="@style/TmdbMargin.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/cast"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+              />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvCast"
-                android:layout_width="match_parent"
+                android:id="@+id/cast_list"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                tools:itemCount="1"
-                tools:listitem="@layout/item_movie_cast" />
+                android:layout_marginTop="@dimen/padding_normal"
+                 />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            <TextView-->
+<!--                style="@style/TmdbMargin.Title"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/crew"-->
+<!--                app:visibility="@{vm.liveData.creditWrapper.crew}" />-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/crew_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_normal" />
+
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
