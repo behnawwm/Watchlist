@@ -19,12 +19,16 @@
         android:id="@+id/movieDetailsFragment"
         android:name="ir.behnawwm.watchlist.features.presentation.main.movie_details.MovieDetailsFragment"
         android:label="MovieDetailsFragment"
-        tools:layout="@layout/fragment_movie_details">
+        tools:layout="@layout/fragment_movie_details_old">
 
         <argument
             android:name="selectedMovieId"
             android:defaultValue="0"
             app:argType="integer" />
+        <argument
+            android:name="isSaved"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/savedFragment"

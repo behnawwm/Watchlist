@@ -1,15 +1,11 @@
-package ir.behnawwm.watchlist.features.presentation.main.movie_list
+package ir.behnawwm.watchlist.features.presentation.main.movie_details.list_item
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import coil.load
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.core.utils.extension.loadImage
 import ir.behnawwm.watchlist.databinding.ItemMovieCastBinding
-import ir.behnawwm.watchlist.databinding.ItemMovieGenreBinding
-import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.Genre
-import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.credits.Cast
 import ir.behnawwm.watchlist.features.presentation.main.movie_details.CastView
 
 class MovieCastListItem(

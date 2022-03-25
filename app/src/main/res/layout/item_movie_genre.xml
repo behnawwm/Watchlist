@@ -8,6 +8,7 @@
     android:layout_marginLeft="2dp"
     android:layout_marginRight="2dp"
     android:paddingTop="4dp"
+    android:foreground="?android:attr/selectableItemBackground"
     android:paddingBottom="4dp"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_rounded_corners_24dp"

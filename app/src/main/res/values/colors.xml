@@ -11,6 +11,7 @@
 
     <!--Base colors-->
     <color name="black_light">#424242</color>
+    <color name="black_dark_shade">#292929</color>
     <color name="yellow">#FFC700</color>
     <color name="dark_red">#7f1a18</color>
     <color name="darkGray">#888888</color>
@@ -22,7 +23,7 @@
 
     <color name="dividerLineColor">#1fffffff</color>
     <color name="red">#ec2637</color>
-    <color name="bottom_sheet_background">#292929</color>
+    <color name="bottom_sheet_background">@color/black_dark_shade</color>
     <color name="shimmerColor">#C2C2C2</color>
 
     <color name="window_background">#282828</color>

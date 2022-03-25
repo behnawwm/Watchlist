@@ -5,7 +5,7 @@
     android:layout_width="100dp"
     android:layout_height="215dp"
     android:layout_marginStart="6dp"
-    android:backgroundTint="@color/bottom_sheet_background"
+    android:backgroundTint="@color/black_dark_shade"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="6dp"
     app:cardElevation="4dp">
@@ -52,7 +52,7 @@
             android:gravity="center"
             android:maxWidth="80dp"
             android:maxLines="2"
-            android:textColor="@color/darkGray"
+            android:textColor="@color/shimmerColor"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

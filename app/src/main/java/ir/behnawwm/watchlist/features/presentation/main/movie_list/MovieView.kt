@@ -2,6 +2,7 @@ package ir.behnawwm.watchlist.features.presentation.main.movie_list
 
 import android.os.Parcelable
 import ir.behnawwm.watchlist.features.data.database.entity.MovieEntity
+import ir.behnawwm.watchlist.features.presentation.main.movie_list.list_item.MovieListItem
 import ir.behnawwm.watchlist.features.presentation.main.saved.SavedMovieListItem
 import kotlinx.parcelize.Parcelize
 

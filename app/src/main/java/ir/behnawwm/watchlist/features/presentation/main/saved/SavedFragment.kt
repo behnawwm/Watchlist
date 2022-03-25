@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +27,7 @@ import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.core.utils.ui.OptionBottomSheetDialog
 import ir.behnawwm.watchlist.databinding.FragmentSavedBinding
+import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieListFragmentDirections
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
 
 @AndroidEntryPoint
@@ -119,6 +122,12 @@ class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.I
                     }
             }
         )
+        savedMoviesAdapter.onClickListener = { view, adapter, item, position ->
+            val action =
+                SavedFragmentDirections.actionSavedFragmentToMovieDetailsFragment(item.movie.id,item.movie.isSaved)
+            findNavController().navigate(action)
+            true
+        }
 
         savedMoviesAdapter.onLongClickListener = { view, adapter, item, position ->
             true

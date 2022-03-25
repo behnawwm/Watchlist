@@ -13,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import ir.behnawwm.watchlist.R
@@ -22,8 +21,6 @@ import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.databinding.FragmentSearchBinding
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieFailure
-import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieListFragmentDirections
-import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieListItem
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay

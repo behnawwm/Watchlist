@@ -2,9 +2,6 @@ package ir.behnawwm.watchlist.features.presentation.main.movie_details
 
 import android.os.Bundle
 import android.view.*
-import android.widget.CompoundButton
-import android.widget.Switch
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,15 +14,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.utils.extension.*
-import ir.behnawwm.watchlist.databinding.FragmentMovieDetails2Binding
-import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieCastListItem
+import ir.behnawwm.watchlist.databinding.FragmentMovieDetailsBinding
+import ir.behnawwm.watchlist.features.presentation.main.movie_details.list_item.MovieCastListItem
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieFailure
-import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieGenreListItem
+import ir.behnawwm.watchlist.features.presentation.main.movie_details.list_item.MovieGenreListItem
 
 
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
-    private lateinit var binding: FragmentMovieDetails2Binding
+    private lateinit var binding: FragmentMovieDetailsBinding
     private val viewModel: MovieDetailsViewModel by viewModels()
     private val args: MovieDetailsFragmentArgs by navArgs()
 
@@ -37,7 +34,7 @@ class MovieDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMovieDetails2Binding.inflate(layoutInflater)
+        binding = FragmentMovieDetailsBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -48,6 +45,7 @@ class MovieDetailsFragment : Fragment() {
         with(viewModel) {
             observe(movieDetails, ::renderMovieDetails)
             observe(movieCredits, ::renderMovieCredits)
+            observeEvent(savedMovieStatus, ::renderSavedMovieStatus)
             failureEvent(failure, ::handleFailure)
         }
         showProgress()
@@ -129,6 +127,22 @@ class MovieDetailsFragment : Fragment() {
         hideProgress()
     }
 
+    private fun renderSavedMovieStatus(isInserted: Boolean?) {  //todo CHANGE! not according to Clean
+        isInserted?.let {
+            if (isInserted)
+//                notifyWithAction(R.string.movie_saved_to_watchlist, R.string.view) {  //todo check why couldn't navigate back
+//                    findNavController().navigate(R.id.action_global_savedFragment)
+//                }
+                notify(R.string.movie_saved_to_watchlist)
+            else
+//                notifyWithAction(R.string.movie_removed_from_watchlist, R.string.view) {
+//                    findNavController().navigate(R.id.action_global_savedFragment)
+//                }
+                notify(R.string.movie_removed_from_watchlist)
+
+        }
+    }
+
     private fun handleFailure(failure: Failure?) {
         when (failure) {
             is Failure.NetworkConnection -> {
@@ -152,9 +166,14 @@ class MovieDetailsFragment : Fragment() {
         inflater.inflate(R.menu.menu_details, menu)
 
         val actionView = menu.findItem(R.id.menu_save).actionView as SparkButton
+        actionView.isChecked = args.isSaved
+
         actionView.setOnClickListener {
-            //todo save
             actionView.isChecked = !actionView.isChecked
+            if (actionView.isChecked)
+                viewModel.insertSavedMovie(viewModel.movieDetails.value!!.toMovieView())
+            else
+                viewModel.deleteSavedMovie(viewModel.movieDetails.value!!.toMovieView())
         }
 
         super.onCreateOptionsMenu(menu, inflater)

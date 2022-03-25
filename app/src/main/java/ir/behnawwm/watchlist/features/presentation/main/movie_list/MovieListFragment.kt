@@ -8,15 +8,14 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
-import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import dagger.hilt.android.AndroidEntryPoint
 import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.databinding.FragmentMovieListBinding
+import ir.behnawwm.watchlist.features.presentation.main.movie_list.list_item.MovieListItem
 
 @AndroidEntryPoint
 class MovieListFragment : Fragment() {
@@ -72,7 +71,7 @@ class MovieListFragment : Fragment() {
             adapter = popularMoviesAdapter
             popularMoviesAdapter.onClickListener = { view, adapter, item, position ->
                 val action =
-                    MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.movie.id)
+                    MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.movie.id,item.movie.isSaved)
                 findNavController().navigate(action)
                 true
             }
@@ -87,7 +86,7 @@ class MovieListFragment : Fragment() {
             adapter = topRatedMoviesAdapter
             topRatedMoviesAdapter.onClickListener = { view, adapter, item, position ->
                 val action =
-                    MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.movie.id)
+                    MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.movie.id,item.movie.isSaved)
                 findNavController().navigate(action)
                 true
             }

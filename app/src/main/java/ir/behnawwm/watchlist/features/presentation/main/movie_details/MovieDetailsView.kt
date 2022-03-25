@@ -1,6 +1,7 @@
 package ir.behnawwm.watchlist.features.presentation.main.movie_details
 
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.Genre
+import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
 
 data class MovieDetailsView(
     val id: Int,
@@ -13,4 +14,6 @@ data class MovieDetailsView(
     val year: Int,
     val trailer: String,
     val genres: List<Genre>
-)
+){
+    fun toMovieView() = MovieView(id,poster,title,rating,false)
+}

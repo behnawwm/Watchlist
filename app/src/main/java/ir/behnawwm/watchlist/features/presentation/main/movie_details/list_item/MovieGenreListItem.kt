@@ -1,4 +1,4 @@
-package ir.behnawwm.watchlist.features.presentation.main.movie_list
+package ir.behnawwm.watchlist.features.presentation.main.movie_details.list_item
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
