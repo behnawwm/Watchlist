@@ -13,6 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import app.moviebase.tmdb.model.AppendResponse
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import ir.behnawwm.watchlist.R
@@ -33,6 +35,7 @@ class SearchFragment : Fragment() {
 
     private lateinit var searchedMoviesAdapter: FastItemAdapter<SearchMovieListItem>
     private var searchJob: Job? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -102,6 +105,7 @@ class SearchFragment : Fragment() {
             layoutManager =
                 GridLayoutManager(requireContext(),2)
             adapter = searchedMoviesAdapter
+            searchedMoviesAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
             searchedMoviesAdapter.onClickListener = { view, adapter, item, position ->
                 val action =
                     SearchFragmentDirections.actionSearchFragmentToMovieDetailsFragment(item.movie.id)

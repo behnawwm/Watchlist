@@ -28,7 +28,7 @@ import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
 class SavedMovieListItem(
     val movie: MovieView,
     override val isDraggable: Boolean = true,
-    override val isSwipeable: Boolean = true, //todo apply swipe effects
+    override val isSwipeable: Boolean = true,
 ) : AbstractItem<SavedMovieListItem.ViewHolder>(), IDraggable, ISwipeable {
 
     override val layoutRes: Int = R.layout.item_saved_movie

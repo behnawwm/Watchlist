@@ -21,7 +21,6 @@ open class OptionBottomSheetDialog(
 ) : BottomSheetDialog(context) {
     lateinit var binding : BottomSheetLayoutBinding
 
-    //TODO layout have a margin in bottom
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = BottomSheetLayoutBinding.inflate(layoutInflater)

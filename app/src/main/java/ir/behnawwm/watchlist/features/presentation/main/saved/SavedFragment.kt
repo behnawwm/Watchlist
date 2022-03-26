@@ -136,6 +136,7 @@ class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.I
         binding.rvSavedMovies.apply {
             adapter = savedMoviesAdapter
             layoutManager = LinearLayoutManager(requireContext())
+            savedMoviesAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         }
     }
 

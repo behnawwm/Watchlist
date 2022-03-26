@@ -26,7 +26,6 @@ interface MoviesRepository {
     suspend fun insertSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None>
     suspend fun deleteSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None>
     suspend fun savedMovies(): Either<Failure, List<MovieEntity>>
-    //todo add delete saved movie from db
     //todo check if suspend is needed
 
     class MoviesRepositoryImpl

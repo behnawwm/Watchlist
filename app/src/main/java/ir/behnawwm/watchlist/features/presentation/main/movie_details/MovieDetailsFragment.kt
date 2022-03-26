@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import com.varunest.sparkbutton.SparkButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,14 +57,6 @@ class MovieDetailsFragment : Fragment() {
         initializeToolbar()
         initializeGenresList()
         initializeCastList()
-        binding.apply {
-//            btnBack.setOnClickListener {
-//                close()
-//            }
-//            btnSave.setOnClickListener {
-//                //todo
-//            }
-        }
     }
 
     private fun initializeToolbar() {
@@ -82,6 +75,8 @@ class MovieDetailsFragment : Fragment() {
             castAdapter = FastItemAdapter()
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            castAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+
             adapter = castAdapter
             castAdapter.onClickListener = { view, adapter, item, position ->
                 //todo navigate to movies with selected cast
@@ -95,6 +90,7 @@ class MovieDetailsFragment : Fragment() {
             genresAdapter = FastItemAdapter()
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            genresAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
             adapter = genresAdapter
             genresAdapter.onClickListener = { view, adapter, item, position ->
                 //todo navigate to movies with selected genre

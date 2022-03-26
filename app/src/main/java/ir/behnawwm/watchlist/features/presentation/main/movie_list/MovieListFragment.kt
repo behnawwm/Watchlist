@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import ir.behnawwm.watchlist.R
@@ -68,6 +69,8 @@ class MovieListFragment : Fragment() {
             popularMoviesAdapter = FastItemAdapter()
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            popularMoviesAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+
             adapter = popularMoviesAdapter
             popularMoviesAdapter.onClickListener = { view, adapter, item, position ->
                 val action =
@@ -83,6 +86,8 @@ class MovieListFragment : Fragment() {
             topRatedMoviesAdapter = FastItemAdapter()
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            topRatedMoviesAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+
             adapter = topRatedMoviesAdapter
             topRatedMoviesAdapter.onClickListener = { view, adapter, item, position ->
                 val action =
