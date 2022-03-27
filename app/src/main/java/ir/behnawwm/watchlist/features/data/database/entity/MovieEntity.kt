@@ -9,7 +9,7 @@ import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
 data class MovieEntity(
     @PrimaryKey val id: Int,
     val title: String,
-    val posterPath: String,
+    val posterPath: String?,
     val rating: Double
 ) {
 

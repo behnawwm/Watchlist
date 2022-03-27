@@ -9,6 +9,9 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentActivity
 import coil.ImageLoader
 import coil.load
+import ir.behnawwm.watchlist.R
+import ir.behnawwm.watchlist.core.constants.GeneralConstants.TMDB_IMAGE_PREFIX_ORIGINAL
+import ir.behnawwm.watchlist.core.constants.GeneralConstants.TMDB_IMAGE_PREFIX_W200
 
 
 fun View.cancelTransition() {
@@ -29,6 +32,26 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
     LayoutInflater.from(context).inflate(layoutRes, this, false)
 
 fun ImageView.loadImage(
+    uri: Any
+) {
+    this.load(uri, CoilUtils.imageLoader(context.applicationContext))
+}
+
+fun ImageView.loadTmdbImageLowQuality(
     uri: String?
-) = this.load(uri, CoilUtils.imageLoader(context.applicationContext))
+) {
+    if (uri.isNullOrEmpty())
+        this.loadImage(R.drawable.no_photo_profile_placeholder)
+    else
+        this.loadImage(TMDB_IMAGE_PREFIX_W200 + uri)
+}
+
+fun ImageView.loadTmdbImageOriginalQuality(
+    uri: String?
+) {
+    if (uri.isNullOrEmpty())
+        this.loadImage(R.drawable.no_photo_profile_placeholder)
+    else
+        this.loadImage(TMDB_IMAGE_PREFIX_ORIGINAL + uri)
+}
 

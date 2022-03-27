@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.core.utils.extension.loadImage
+import ir.behnawwm.watchlist.core.utils.extension.loadTmdbImageLowQuality
 import ir.behnawwm.watchlist.databinding.ItemMovieBinding
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
 
@@ -21,7 +22,7 @@ class MovieListItem(
 
     override fun bindView(binding: ItemMovieBinding, payloads: List<Any>) {
         binding.apply {
-            ivMoviePoster.loadImage(movie.poster)
+            ivMoviePoster.loadTmdbImageLowQuality(movie.poster)
             tvMovieTitle.text = movie.title
             tvRating.text = movie.rating.toString()
             sbSave.isChecked = movie.isSaved

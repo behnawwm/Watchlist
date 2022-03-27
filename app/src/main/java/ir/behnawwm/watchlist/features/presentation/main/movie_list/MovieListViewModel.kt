@@ -67,9 +67,9 @@ class MovieListViewModel @Inject constructor(
         _popularMovies.value = Event(movies.results.map {
             MovieView(
                 it.id,
-                GeneralConstants.TMDB_IMAGE_PREFIX + it.poster_path,
+                GeneralConstants.TMDB_IMAGE_PREFIX + it.posterPath,
                 it.title,
-                it.vote_average,
+                it.voteAverage,
                 savedMoviesIdList.contains(it.id)
             )
         })
@@ -81,9 +81,9 @@ class MovieListViewModel @Inject constructor(
         _topRatedMovies.value = Event(movies.results.map {
             MovieView(
                 it.id,
-                GeneralConstants.TMDB_IMAGE_PREFIX + it.poster_path,
+                GeneralConstants.TMDB_IMAGE_PREFIX + it.posterPath,
                 it.title,
-                it.vote_average,
+                it.voteAverage,
                 savedMoviesIdList.contains(it.id)
             )
         })

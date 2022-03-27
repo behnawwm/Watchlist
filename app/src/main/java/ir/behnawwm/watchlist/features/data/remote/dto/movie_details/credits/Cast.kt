@@ -1,22 +1,42 @@
 package ir.behnawwm.watchlist.features.data.remote.dto.movie_details.credits
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import ir.behnawwm.watchlist.core.constants.GeneralConstants
 import ir.behnawwm.watchlist.features.presentation.main.movie_details.CastView
 
+
+@JsonClass(generateAdapter = true)
 data class Cast(
-    val adult: Boolean,
-    val cast_id: Int,
-    val character: String,
-    val credit_id: String,
-    val gender: Int,
+    val adult: Boolean?,
+
+    @Json(name = "cast_id")
+    val castId: Int?,
+
+    val character: String= "",
+
+    @Json(name = "credit_id")
+    val creditId: String = "",
+
+    val gender: Int?,
+
     val id: Int,
-    val known_for_department: String,
+
+    @Json(name = "known_for_department")
+    val knownForDepartment: String?,
+
     val name: String,
-    val order: Int,
-    val original_name: String,
-    val popularity: Double,
-    val profile_path: String
+
+    val order: Int?,
+
+    @Json(name = "original_name")
+    val originalName: String = "",
+
+    val popularity: Double?,
+
+    @Json(name = "profile_path")
+    val profilePath: String?
 ) {
     fun toCastView() =
-        CastView(id, name, character, GeneralConstants.TMDB_IMAGE_PREFIX_W200 + profile_path)
+        CastView(id, name, character, profilePath)
 }

@@ -57,9 +57,9 @@ class MovieDetailsViewModel @Inject constructor(
         _movieDetails.value = MovieDetailsView(
             movie.id,
             movie.title,
-            GeneralConstants.TMDB_IMAGE_PREFIX + movie.poster_path,
+            movie.posterPath,
             movie.overview,
-            movie.vote_average,
+            movie.voteAverage,
             movie.overview,
             movie.overview,
             movie.budget,

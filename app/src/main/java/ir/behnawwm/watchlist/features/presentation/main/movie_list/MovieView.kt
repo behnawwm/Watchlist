@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class MovieView(
     val id: Int,
-    val poster: String,
+    val poster: String?,
     val title: String,
     val rating: Double,
     var isSaved : Boolean

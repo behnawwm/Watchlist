@@ -12,6 +12,7 @@ import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import com.mikepenz.fastadapter.items.AbstractItem
 import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.core.utils.extension.loadImage
+import ir.behnawwm.watchlist.core.utils.extension.loadTmdbImageLowQuality
 import ir.behnawwm.watchlist.databinding.ItemMovieBinding
 import ir.behnawwm.watchlist.databinding.ItemSavedMovieBinding
 import ir.behnawwm.watchlist.databinding.ItemSearchedMovieBinding
@@ -29,7 +30,7 @@ class SearchMovieListItem(
 
     override fun bindView(binding: ItemSearchedMovieBinding, payloads: List<Any>) {
         binding.apply {
-            ivMoviePoster.loadImage(movie.poster)
+            ivMoviePoster.loadTmdbImageLowQuality(movie.poster)
             tvMovieTitle.text = movie.title
             tvRating.text = movie.rating.toString()
         }

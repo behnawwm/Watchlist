@@ -6,7 +6,7 @@ import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
 data class MovieDetailsView(
     val id: Int,
     val title: String,
-    val poster: String,
+    val poster: String?,
     val summary: String,
     val rating: Double,
     val cast: String,

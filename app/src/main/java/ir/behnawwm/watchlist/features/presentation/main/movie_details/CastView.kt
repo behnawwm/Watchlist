@@ -4,5 +4,5 @@ data class CastView(
     val id: Int,
     val name: String,
     val character: String,
-    val profileImage: String
+    val profileImage: String?
 )

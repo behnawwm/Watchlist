@@ -20,6 +20,7 @@ import com.mikepenz.fastadapter.swipe.ISwipeable
 import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.core.utils.extension.invisible
 import ir.behnawwm.watchlist.core.utils.extension.loadImage
+import ir.behnawwm.watchlist.core.utils.extension.loadTmdbImageLowQuality
 import ir.behnawwm.watchlist.core.utils.extension.visible
 import ir.behnawwm.watchlist.core.utils.ui.OptionBottomSheetDialog
 import ir.behnawwm.watchlist.databinding.ItemSavedMovieBinding
@@ -39,7 +40,7 @@ class SavedMovieListItem(
         super.bindView(holder, payloads)
 
         holder.apply {
-            ivMoviePoster.loadImage(movie.poster)
+            ivMoviePoster.loadTmdbImageLowQuality(movie.poster)
             tvMovieTitle.text = movie.title
             tvRating.text = movie.rating.toString()
         }
@@ -48,7 +49,7 @@ class SavedMovieListItem(
     override fun unbindView(holder: ViewHolder) {
         super.unbindView(holder)
         holder.apply {
-            ivMoviePoster.loadImage(null)
+//            ivMoviePoster.setImageResource(null)
             tvMovieTitle.text = null
             tvRating.text = null
         }

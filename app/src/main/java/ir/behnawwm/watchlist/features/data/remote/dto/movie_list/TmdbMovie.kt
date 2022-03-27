@@ -1,23 +1,47 @@
 package ir.behnawwm.watchlist.features.data.remote.dto.movie_list
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import ir.behnawwm.watchlist.core.constants.GeneralConstants
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
 
+@JsonClass(generateAdapter = true)
 data class TmdbMovie(
     val adult: Boolean,
-    val backdrop_path: String,
-    val genre_ids: List<Int>,
+
+    @Json(name = "backdrop_path")
+    val backdropPath: String,
+
+    @Json(name = "genre_ids")
+    val genreIds: List<Int>,
+
     val id: Int,
-    val original_language: String,
-    val original_title: String,
+
+    @Json(name = "original_language")
+    val originalLanguage: String,
+
+    @Json(name = "original_title")
+    val originalTitle: String,
+
     val overview: String,
+
     val popularity: Double,
-    val poster_path: String,
-    val release_date: String,
+
+    @Json(name = "poster_path")
+    val posterPath: String?,
+
+    @Json(name = "release_date")
+    val releaseDate: String,
+
     val title: String,
+
     val video: Boolean,
-    val vote_average: Double,
-    val vote_count: Int
+
+    @Json(name = "vote_average")
+    val voteAverage: Double,
+
+    @Json(name = "vote_count")
+    val voteCount: Int
 ){
-    fun toMovieView() = MovieView(id, GeneralConstants.TMDB_IMAGE_PREFIX + poster_path,title,vote_average,false)
+    fun toMovieView() = MovieView(id, posterPath,title,voteAverage,false)
 }

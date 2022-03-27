@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import ir.behnawwm.watchlist.R
+import ir.behnawwm.watchlist.core.constants.GeneralConstants.TMDB_IMAGE_PREFIX_W200
 import ir.behnawwm.watchlist.core.utils.extension.loadImage
+import ir.behnawwm.watchlist.core.utils.extension.loadTmdbImageLowQuality
 import ir.behnawwm.watchlist.databinding.ItemMovieCastBinding
 import ir.behnawwm.watchlist.features.presentation.main.movie_details.CastView
 
@@ -22,7 +24,7 @@ class MovieCastListItem(
         binding.apply {
             tvNameCast.text = cast.name
             tvCharacterCast.text = cast.character
-            ivProfileCast.loadImage(cast.profileImage)
+            ivProfileCast.loadTmdbImageLowQuality(cast.profileImage)
         }
     }
 

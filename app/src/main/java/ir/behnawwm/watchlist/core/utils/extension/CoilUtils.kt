@@ -46,7 +46,7 @@ object CoilUtils {
         val newImageLoader = ImageLoader.Builder(context)
             .crossfade(true)
             .placeholder(R.color.shimmerColor)
-            .error(R.drawable.error_placeholder)
+            .error(R.drawable.error_photo_placeholder)
             .memoryCache {
                 MemoryCache.Builder(context)
                     .maxSizePercent(0.25)

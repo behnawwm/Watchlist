@@ -2,10 +2,8 @@ package ir.behnawwm.watchlist.core.di
 
 import android.app.Application
 import androidx.room.Room
-import coil.ImageLoader
-import coil.annotation.ExperimentalCoilApi
-import coil.disk.DiskCache
-import coil.memory.MemoryCache
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,20 +15,27 @@ import ir.behnawwm.watchlist.features.domain.repository.MoviesRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class ApplicationModule {
 
+    @Singleton
+    @Provides
+    fun provideMoshi(): Moshi =
+        Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(moshi: Moshi): Retrofit {
         return Retrofit.Builder()
             .baseUrl(GeneralConstants.BASE_URL_TMDB)
             .client(createClient())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }
 
