@@ -1,13 +1,13 @@
 package ir.behnawwm.watchlist.core.utils.extension
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
-import androidx.fragment.app.FragmentActivity
-import coil.ImageLoader
 import coil.load
 import ir.behnawwm.watchlist.R
 import ir.behnawwm.watchlist.core.constants.GeneralConstants.TMDB_IMAGE_PREFIX_ORIGINAL
@@ -24,8 +24,11 @@ fun View.visible() {
     this.visibility = View.VISIBLE
 }
 
-fun View.invisible() {
+fun View.gone() {
     this.visibility = View.GONE
+}
+fun View.invisible() {
+    this.visibility = View.INVISIBLE
 }
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
@@ -55,3 +58,13 @@ fun ImageView.loadTmdbImageOriginalQuality(
         this.loadImage(TMDB_IMAGE_PREFIX_ORIGINAL + uri)
 }
 
+fun View.showWithFade() {
+    this.visible()
+    val fadeIn = AlphaAnimation(0f, 1f).apply {
+        interpolator = DecelerateInterpolator()
+        duration = 500
+//        startOffset = 1000
+        fillAfter = true
+    }
+    this.startAnimation(fadeIn)
+}

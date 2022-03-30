@@ -1,29 +1,18 @@
 package ir.behnawwm.watchlist.features.presentation.main.saved
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.binding.AbstractBindingItem
-import com.mikepenz.fastadapter.binding.BindingViewHolder
 import com.mikepenz.fastadapter.drag.IDraggable
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.mikepenz.fastadapter.listeners.TouchEventHook
 import com.mikepenz.fastadapter.swipe.IDrawerSwipeableViewHolder
 import com.mikepenz.fastadapter.swipe.ISwipeable
 import ir.behnawwm.watchlist.R
-import ir.behnawwm.watchlist.core.utils.extension.invisible
-import ir.behnawwm.watchlist.core.utils.extension.loadImage
 import ir.behnawwm.watchlist.core.utils.extension.loadTmdbImageLowQuality
-import ir.behnawwm.watchlist.core.utils.extension.visible
-import ir.behnawwm.watchlist.core.utils.ui.OptionBottomSheetDialog
-import ir.behnawwm.watchlist.databinding.ItemSavedMovieBinding
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
 
 class SavedMovieListItem(

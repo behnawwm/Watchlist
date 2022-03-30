@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.databinding.FragmentMovieListBinding
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.list_item.MovieListItem
+
 
 @AndroidEntryPoint
 class MovieListFragment : Fragment() {
@@ -46,6 +48,14 @@ class MovieListFragment : Fragment() {
     private fun initializeView() {
         initializePopularList()
         initializeTopRatedList()
+        initializeSwipeRefreshLayout()
+    }
+
+    private fun initializeSwipeRefreshLayout() {
+        binding.layoutSwipeRefresh.setOnRefreshListener {
+            loadSavedMoviesList()
+            binding.layoutSwipeRefresh.isRefreshing = false
+        }
     }
 
     private fun initObservers() {
@@ -64,17 +74,22 @@ class MovieListFragment : Fragment() {
         viewModel.loadSavedMoviesList()
     }
 
+
     private fun initializePopularList() {
         binding.rvPopularMovies.apply {
             popularMoviesAdapter = FastItemAdapter()
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            popularMoviesAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+            popularMoviesAdapter.stateRestorationPolicy =
+                RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
             adapter = popularMoviesAdapter
             popularMoviesAdapter.onClickListener = { view, adapter, item, position ->
                 val action =
-                    MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.movie.id,item.movie.isSaved)
+                    MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(
+                        item.movie.id,
+                        item.movie.isSaved
+                    )
                 findNavController().navigate(action)
                 true
             }
@@ -86,12 +101,16 @@ class MovieListFragment : Fragment() {
             topRatedMoviesAdapter = FastItemAdapter()
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            topRatedMoviesAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+            topRatedMoviesAdapter.stateRestorationPolicy =
+                RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
             adapter = topRatedMoviesAdapter
             topRatedMoviesAdapter.onClickListener = { view, adapter, item, position ->
                 val action =
-                    MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.movie.id,item.movie.isSaved)
+                    MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(
+                        item.movie.id,
+                        item.movie.isSaved
+                    )
                 findNavController().navigate(action)
                 true
             }
@@ -158,25 +177,44 @@ class MovieListFragment : Fragment() {
     }
 
     private fun renderFailure(@StringRes message: Int) {
-        binding.apply {
-            rvPopularMovies.invisible()
-            rvTopRatedMovies.invisible()
-//            ivEmpty.visible()
-        }
+        hideAllViews()
+        showErrorViews(message)
+
         hideProgress()
         notifyWithAction(message, R.string.action_refresh, ::loadSavedMoviesList)
     }
 
+    private fun showErrorViews(@StringRes message: Int) {
+        binding.apply {
+            showAnimationView()
+            tvError.text = resources.getString(message)
+        }
+    }
+
+    private fun showAnimationView() {
+        binding.animationViewError.apply {
+            visible()
+            progress = 0f
+            playAnimation()
+        }
+        doWithDelay(binding.animationViewError.duration - 200) {
+            lifecycleScope.launchWhenResumed {
+                binding.tvError.showWithFade()
+            }
+        }
+    }
 
     private fun hideAllViews() {
         binding.apply {
 //            ivEmpty.invisible()
-            rvPopularMovies.invisible()
-            rvTopRatedMovies.invisible()
-            tvPopular.invisible()
-            tvTopRated.invisible()
-            tvMorePopular.invisible()
-            tvMoreTopRated.invisible()
+            rvPopularMovies.gone()
+            rvTopRatedMovies.gone()
+            tvPopular.gone()
+            tvTopRated.gone()
+            tvMorePopular.gone()
+            tvMoreTopRated.gone()
+            animationViewError.gone()
+            tvError.invisible()
         }
     }
 

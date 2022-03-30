@@ -14,7 +14,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import app.moviebase.tmdb.model.AppendResponse
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import ir.behnawwm.watchlist.R
@@ -62,7 +61,7 @@ class SearchFragment : Fragment() {
 
     private fun loadSavedMoviesList(query: String) {
         binding.apply {
-            rvSearchedMovies.invisible()
+            rvSearchedMovies.gone()
             animationViewSearch.visible()
         }
         showProgress()
@@ -125,7 +124,7 @@ class SearchFragment : Fragment() {
     private fun showAllViews() {
         binding.apply {
             rvSearchedMovies.visible()
-            animationViewSearch.invisible()
+            animationViewSearch.gone()
         }
     }
 
@@ -140,7 +139,7 @@ class SearchFragment : Fragment() {
 
     private fun renderFailure(@StringRes message: Int) { //todo
         binding.apply {
-            rvSearchedMovies.invisible()
+            rvSearchedMovies.gone()
             animationViewSearch.visible()
         }
         hideProgress()

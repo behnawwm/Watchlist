@@ -7,16 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import com.mikepenz.fastadapter.drag.ItemTouchCallback
 import com.mikepenz.fastadapter.drag.SimpleDragCallback
-import com.mikepenz.fastadapter.listeners.ClickEventHook
 import com.mikepenz.fastadapter.listeners.addClickListener
 import com.mikepenz.fastadapter.swipe.SimpleSwipeDrawerCallback
 import com.mikepenz.fastadapter.swipe_drag.SimpleSwipeDrawerDragCallback
@@ -27,7 +24,6 @@ import ir.behnawwm.watchlist.core.exception.Failure
 import ir.behnawwm.watchlist.core.utils.extension.*
 import ir.behnawwm.watchlist.core.utils.ui.OptionBottomSheetDialog
 import ir.behnawwm.watchlist.databinding.FragmentSavedBinding
-import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieListFragmentDirections
 import ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieView
 
 @AndroidEntryPoint
@@ -67,8 +63,8 @@ class SavedFragment : Fragment(), ItemTouchCallback, SimpleSwipeDrawerCallback.I
 
     private fun loadSavedMoviesList() {
         binding.apply {
-            rvSavedMovies.invisible()
-            tvTitleSaved.invisible()
+            rvSavedMovies.gone()
+            tvTitleSaved.gone()
         }
         showProgress()
         viewModel.loadSavedMovies()
