@@ -29,6 +29,9 @@
             android:name="isSaved"
             app:argType="boolean"
             android:defaultValue="false" />
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_personDetailsFragment"
+            app:destination="@id/personDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/savedFragment"
@@ -61,5 +64,14 @@
     <action
         android:id="@+id/action_global_movieListFragment"
         app:destination="@id/movieListFragment" />
+    <fragment
+        android:id="@+id/personDetailsFragment"
+        android:name="ir.behnawwm.watchlist.features.presentation.main.person_details.PersonDetailsFragment"
+        android:label="PersonDetailsFragment"
+        tools:layout="@layout/fragment_person_details">
+        <argument
+            android:name="selectedMovieId"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

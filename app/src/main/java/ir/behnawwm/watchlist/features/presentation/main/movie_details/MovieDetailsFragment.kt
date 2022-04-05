@@ -79,7 +79,11 @@ class MovieDetailsFragment : Fragment() {
 
             adapter = castAdapter
             castAdapter.onClickListener = { view, adapter, item, position ->
-                //todo navigate to movies with selected cast
+                val direction =
+                    MovieDetailsFragmentDirections.actionMovieDetailsFragmentToPersonDetailsFragment(
+                        item.cast.id
+                    )
+                findNavController().navigate(direction)
                 true
             }
         }

@@ -11,6 +11,7 @@ import ir.behnawwm.watchlist.features.data.remote.api_service.MoviesService
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.MovieDetails
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.credits.MovieCredits
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_list.TmdbPageResult
+import ir.behnawwm.watchlist.features.data.remote.dto.person_details.PersonDetails
 import ir.behnawwm.watchlist.features.data.remote.dto.search_movie.MovieSearchResponse
 import retrofit2.Call
 import java.lang.Exception
@@ -18,6 +19,7 @@ import javax.inject.Inject
 
 interface MoviesRepository {
     fun movieDetails(movieId: Int): Either<Failure, MovieDetails>
+    fun personDetails(personId: Int): Either<Failure, PersonDetails>
     fun movieDetailsCredits(movieId: Int): Either<Failure, MovieCredits>
     fun popularMovies(): Either<Failure, TmdbPageResult>
     fun topRatedMovies(): Either<Failure, TmdbPageResult>
@@ -41,6 +43,17 @@ interface MoviesRepository {
                     service.movieDetails(movieId, GeneralConstants.TMDB_TOKEN),
                     { it },
                     MovieDetails.empty
+                )
+                false -> Either.Left(Failure.NetworkConnection)
+            }
+        }
+
+        override fun personDetails(personId: Int): Either<Failure, PersonDetails> {
+            return when (networkHandler.isNetworkAvailable()) {
+                true -> request(
+                    service.personDetails(personId, GeneralConstants.TMDB_TOKEN),
+                    { it },
+                    PersonDetails.empty
                 )
                 false -> Either.Left(Failure.NetworkConnection)
             }
