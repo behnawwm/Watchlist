@@ -9,6 +9,7 @@ import ir.behnawwm.watchlist.core.functional.Event
 import ir.behnawwm.watchlist.core.interactor.UseCase
 import ir.behnawwm.watchlist.core.platform.BaseViewModel
 import ir.behnawwm.watchlist.features.data.database.entity.MovieEntity
+import ir.behnawwm.watchlist.features.data.remote.dto.movie_list.TmdbMovie
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_list.TmdbPageResult
 import ir.behnawwm.watchlist.features.domain.use_case.*
 import javax.inject.Inject
@@ -62,31 +63,15 @@ class MovieListViewModel @Inject constructor(
         _savedMovies.value = Event(savedMovies.map { it.toMovieView() })
     }
 
-    private fun handlePopularMovieList(movies: TmdbPageResult) {
+    private fun handlePopularMovieList(movies: TmdbPageResult<TmdbMovie>) {
         val savedMoviesIdList = savedMovies.value?.peekContent().orEmpty().map { it.id }
-        _popularMovies.value = Event(movies.results.map {
-            MovieView(
-                it.id,
-                GeneralConstants.TMDB_IMAGE_PREFIX + it.posterPath,
-                it.title,
-                it.voteAverage,
-                savedMoviesIdList.contains(it.id)
-            )
-        })
+        _popularMovies.value = Event(movies.results.map {it.toMovieView()})
     }
 
-    private fun handleTopRatedMovieList(movies: TmdbPageResult) {
+    private fun handleTopRatedMovieList(movies: TmdbPageResult<TmdbMovie>) {
         val savedMoviesIdList = savedMovies.value?.peekContent().orEmpty().map { it.id }
 
-        _topRatedMovies.value = Event(movies.results.map {
-            MovieView(
-                it.id,
-                GeneralConstants.TMDB_IMAGE_PREFIX + it.posterPath,
-                it.title,
-                it.voteAverage,
-                savedMoviesIdList.contains(it.id)
-            )
-        })
+        _topRatedMovies.value = Event(movies.results.map { it.toMovieView() })
     }
 
     fun insertSavedMovie(movie: MovieView) {

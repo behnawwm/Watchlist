@@ -7,8 +7,8 @@ import com.squareup.moshi.JsonClass
 data class ProductionCompany(
     val id: Int,
     @Json(name = "logo_path")
-    val logoPath: String,
-    val name: String,
+    val logoPath: String?,
+    val name: String?,
     @Json(name = "origin_country")
-    val originCountry: String
+    val originCountry: String?
 )

@@ -56,15 +56,15 @@ class MovieDetailsViewModel @Inject constructor(
     private fun handleMovieDetails(movie: MovieDetails) {
         _movieDetails.value = MovieDetailsView(
             movie.id,
-            movie.title,
+            movie.title.orEmpty(),
             movie.posterPath,
-            movie.overview,
-            movie.voteAverage,
-            movie.overview,
-            movie.overview,
-            movie.budget,
-            movie.overview,
-            movie.genres
+            movie.overview.orEmpty(),
+            movie.voteAverage ?: 0.0,
+            movie.overview.orEmpty(),
+            movie.overview.orEmpty(),
+            movie.budget ?: 0,
+            movie.overview.orEmpty(),
+            movie.genres.orEmpty()
         )
     }
 

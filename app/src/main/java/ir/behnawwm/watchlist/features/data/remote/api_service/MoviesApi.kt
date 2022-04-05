@@ -2,9 +2,9 @@ package ir.behnawwm.watchlist.features.data.remote.api_service
 
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.MovieDetails
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.credits.MovieCredits
+import ir.behnawwm.watchlist.features.data.remote.dto.movie_list.TmdbMovie
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_list.TmdbPageResult
 import ir.behnawwm.watchlist.features.data.remote.dto.person_details.PersonDetails
-import ir.behnawwm.watchlist.features.data.remote.dto.search_movie.MovieSearchResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,10 +13,10 @@ import retrofit2.http.Query
 internal interface MoviesApi {
 
     @GET("3/movie/popular/")
-    fun popularMovies(@Query("api_key") token: String): Call<TmdbPageResult>
+    fun popularMovies(@Query("api_key") token: String): Call<TmdbPageResult<TmdbMovie>>
 
     @GET("3/movie/top_rated/")
-    fun topRatedMovies(@Query("api_key") token: String): Call<TmdbPageResult>
+    fun topRatedMovies(@Query("api_key") token: String): Call<TmdbPageResult<TmdbMovie>>
 
     @GET("3/movie/{id}")
     fun movieDetails(
@@ -42,5 +42,5 @@ internal interface MoviesApi {
     fun searchMovie(
         @Query("api_key") token: String,
         @Query("query") query: String
-    ): Call<MovieSearchResponse>
+    ): Call<TmdbPageResult<TmdbMovie>>
 }

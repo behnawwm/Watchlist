@@ -10,9 +10,9 @@ import ir.behnawwm.watchlist.features.data.database.entity.MovieEntity
 import ir.behnawwm.watchlist.features.data.remote.api_service.MoviesService
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.MovieDetails
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_details.credits.MovieCredits
+import ir.behnawwm.watchlist.features.data.remote.dto.movie_list.TmdbMovie
 import ir.behnawwm.watchlist.features.data.remote.dto.movie_list.TmdbPageResult
 import ir.behnawwm.watchlist.features.data.remote.dto.person_details.PersonDetails
-import ir.behnawwm.watchlist.features.data.remote.dto.search_movie.MovieSearchResponse
 import retrofit2.Call
 import java.lang.Exception
 import javax.inject.Inject
@@ -21,9 +21,9 @@ interface MoviesRepository {
     fun movieDetails(movieId: Int): Either<Failure, MovieDetails>
     fun personDetails(personId: Int): Either<Failure, PersonDetails>
     fun movieDetailsCredits(movieId: Int): Either<Failure, MovieCredits>
-    fun popularMovies(): Either<Failure, TmdbPageResult>
-    fun topRatedMovies(): Either<Failure, TmdbPageResult>
-    fun searchMovie(query: String): Either<Failure, MovieSearchResponse>
+    fun popularMovies(): Either<Failure, TmdbPageResult<TmdbMovie>>
+    fun topRatedMovies(): Either<Failure, TmdbPageResult<TmdbMovie>>
+    fun searchMovie(query: String): Either<Failure, TmdbPageResult<TmdbMovie>>
 
     suspend fun insertSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None>
     suspend fun deleteSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None>
@@ -70,7 +70,7 @@ interface MoviesRepository {
             }
         }
 
-        override fun popularMovies(): Either<Failure, TmdbPageResult> {
+        override fun popularMovies(): Either<Failure, TmdbPageResult<TmdbMovie>> {
             return when (networkHandler.isNetworkAvailable()) {
                 true -> request(
                     service.popularMovies(GeneralConstants.TMDB_TOKEN),
@@ -81,7 +81,7 @@ interface MoviesRepository {
             }
         }
 
-        override fun topRatedMovies(): Either<Failure, TmdbPageResult> {
+        override fun topRatedMovies(): Either<Failure, TmdbPageResult<TmdbMovie>> {
             return when (networkHandler.isNetworkAvailable()) {
                 true -> request(
                     service.topRatedMovies(GeneralConstants.TMDB_TOKEN),
@@ -92,12 +92,12 @@ interface MoviesRepository {
             }
         }
 
-        override fun searchMovie(query: String): Either<Failure, MovieSearchResponse> {
+        override fun searchMovie(query: String): Either<Failure, TmdbPageResult<TmdbMovie>> {
             return when (networkHandler.isNetworkAvailable()) {
                 true -> request(
                     service.searchMovie(GeneralConstants.TMDB_TOKEN, query),
                     { it },
-                    MovieSearchResponse.empty
+                    TmdbPageResult.empty
                 )
                 false -> Either.Left(Failure.NetworkConnection)
             }
