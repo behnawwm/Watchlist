@@ -12,11 +12,15 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowActivityTransitions">true</item>
-        <item name="android:windowContentTransitions">true</item>
+<!--        <item name="android:windowActivityTransitions">true</item>-->
+<!--        <item name="android:windowContentTransitions">true</item>-->
         <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:windowTranslucentStatus">true</item>
+
         <item name="android:fontFamily">@font/font_poppins</item>
         <item name="android:textColor">@android:color/white</item>
+
+        <!-- fix for error: "This Activity already has an action bar supplied by the window decor. Do not request Window.FEATURE_ACTION_BAR and set windowActionBar to false in your theme to use a Toolbar instead."-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 

@@ -15,6 +15,7 @@
     <color name="yellow">#FFC700</color>
     <color name="dark_red">#7f1a18</color>
     <color name="darkGray">#888888</color>
+    <color name="transparent">#00000000</color>
 
     <color name="colorTextPrimary">@color/white</color>
     <color name="colorTextSecondary">@color/dark_red</color>

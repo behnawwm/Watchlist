@@ -59,12 +59,11 @@
         android:paddingTop="4dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="120dp"
-        tools:layout_editor_absoluteY="259dp"
         tools:text="Video Title" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/details_toolbar"
+        android:paddingTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"

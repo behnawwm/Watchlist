@@ -159,6 +159,7 @@
             android:id="@id/details_appbar_background"
             android:layout_width="0dp"
             android:layout_height="?android:attr/actionBarSize"
+            android:layout_marginTop="20dp"
             android:elevation="@dimen/z_app_bar"
             app:layout_constraintEnd_toEndOf="@id/details_rv"
             app:layout_constraintStart_toStartOf="@id/details_rv"
