@@ -60,7 +60,6 @@ class MovieListFragment : Fragment() {
 
     private fun initObservers() {
         with(viewModel) {
-            observeEvent(savedMovies, ::proceedToLoadMoviesLists)
             observeEvent(popularMovies, ::renderPopularMoviesList)
             observeEvent(topRatedMovies, ::renderTopRatedMoviesList)
             observeEvent(savedMovieStatus, ::renderSavedMovieStatus)
@@ -71,9 +70,8 @@ class MovieListFragment : Fragment() {
     private fun loadSavedMoviesList() {
         hideAllViews()
         showProgress()
-        viewModel.loadSavedMoviesList()
+        loadAllMoviesLists()
     }
-
 
     private fun initializePopularList() {
         binding.rvPopularMovies.apply {
@@ -117,11 +115,8 @@ class MovieListFragment : Fragment() {
         }
     }
 
-    private fun proceedToLoadMoviesLists(savedMovies: List<MovieView>?) {
-        loadMoviesLists()
-    }
-
-    private fun loadMoviesLists() {
+    private fun loadAllMoviesLists() {
+        viewModel.loadSavedMoviesList()
         viewModel.loadPopularMovies()
         viewModel.loadTopRatedMovies()
     }

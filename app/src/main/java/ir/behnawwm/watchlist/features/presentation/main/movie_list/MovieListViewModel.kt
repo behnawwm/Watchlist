@@ -34,10 +34,10 @@ class MovieListViewModel @Inject constructor(
         MutableLiveData() //todo change Boolean
     val savedMovieStatus: LiveData<Event<Boolean>> = _savedMovieStatus
 
-    private val _savedMovies: MutableLiveData<Event<List<MovieView>>> = MutableLiveData()
-    val savedMovies: LiveData<Event<List<MovieView>>> = _savedMovies
+    private lateinit var savedMovies: List<MovieEntity>
+    private val savedMoviesIds get() = savedMovies.map { it.id }
 
-    fun loadSavedMoviesList() = //todo IMPORTANT get movies with pagination methods
+    fun loadSavedMoviesList() =
         getAllSavedMovies(UseCase.None, viewModelScope) {
             it.fold(::handleFailure, ::handleSavedMoviesList)
         }
@@ -60,18 +60,21 @@ class MovieListViewModel @Inject constructor(
 
 
     private fun handleSavedMoviesList(savedMovies: List<MovieEntity>) {
-        _savedMovies.value = Event(savedMovies.map { it.toMovieView() })
+        this.savedMovies = savedMovies
     }
 
     private fun handlePopularMovieList(movies: TmdbPageResult<TmdbMovie>) {
-        val savedMoviesIdList = savedMovies.value?.peekContent().orEmpty().map { it.id }
-        _popularMovies.value = Event(movies.results.map {it.toMovieView()})
+        val moviesWithSavedStatus = movies.results
+            .map { it.toMovieView() }
+            .map { it.copy(isSaved = savedMoviesIds.contains(it.id)) }
+        _popularMovies.value = Event(moviesWithSavedStatus)
     }
 
     private fun handleTopRatedMovieList(movies: TmdbPageResult<TmdbMovie>) {
-        val savedMoviesIdList = savedMovies.value?.peekContent().orEmpty().map { it.id }
-
-        _topRatedMovies.value = Event(movies.results.map { it.toMovieView() })
+        val moviesWithSavedStatus = movies.results
+            .map { it.toMovieView() }
+            .map { it.copy(isSaved = savedMoviesIds.contains(it.id)) }
+        _topRatedMovies.value = Event(moviesWithSavedStatus)
     }
 
     fun insertSavedMovie(movie: MovieView) {
