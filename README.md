@@ -9,8 +9,8 @@ Project is in progress...
   - Room Persistence - Constructs Database by providing an abstraction layer over SQLite to allow fluent database access.
 - Architecture
   - MVVM Architecture (View - DataBinding - ViewModel - Model)
-<!--   - [Bindables](https://github.com/skydoves/bindables) - Android DataBinding kit for notifying data changes to UI layers. -->
   - Repository Pattern
+  - Clean architecture (UseCases, Interactors, Entities)
 - [Retrofit2 & OkHttp3](https://github.com/square/retrofit) - Construct the REST APIs.
 - [Moshi](https://github.com/square/moshi/) - A modern JSON library for Kotlin and Java.
 - [Coil](https://github.com/coil-kt/coil) Loading images from network.
