@@ -30,4 +30,8 @@
     <string name="summary">Summary</string>
     <string name="save">Save</string>
     <string name="biography">Biography</string>
+    <string name="more"><![CDATA[More >]]></string>
+    <string name="popular">Popular</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="saved">Saved</string>
 </resources>
