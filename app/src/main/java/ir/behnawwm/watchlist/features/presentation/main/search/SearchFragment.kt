@@ -69,7 +69,7 @@ class SearchFragment : Fragment() {
 
     private fun initializeView() {
         initSearchedMoviesList()
-        binding.btnSearch.addTextChangedListener(object : TextWatcher {
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 query: CharSequence?,
                 start: Int,

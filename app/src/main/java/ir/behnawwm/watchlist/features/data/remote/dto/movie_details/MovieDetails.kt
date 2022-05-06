@@ -42,7 +42,7 @@ data class MovieDetails(
     @Json(name = "release_date")
     val releaseDate: String?,
 
-    val revenue: Int?,
+    var revenue: Long?,
     val runtime: Int?,
 
     @Json(name = "spoken_languages")

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_saved"
+    app:startDestination="@id/savedFragment">
+
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="ir.behnawwm.watchlist.features.presentation.main.movie_details.MovieDetailsFragment"
+        tools:layout="@layout/fragment_movie_details_old"
+        android:label="MovieDetailsFragment">
+
+        <argument
+            android:name="selectedMovieId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="isSaved"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_personDetailsFragment"
+            app:destination="@id/personDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personDetailsFragment"
+        android:name="ir.behnawwm.watchlist.features.presentation.main.person_details.PersonDetailsFragment"
+        tools:layout="@layout/fragment_person_details"
+        android:label="PersonDetailsFragment">
+        <argument
+            android:name="selectedMovieId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="ir.behnawwm.watchlist.features.presentation.main.saved.SavedFragment"
+        tools:layout="@layout/fragment_saved"
+        android:label="SavedFragment" >
+        <action
+            android:id="@+id/action_savedFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+</navigation>

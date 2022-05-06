@@ -58,7 +58,7 @@ class PersonDetailsFragment : Fragment() {
             personDetails?.let {
                 with(personDetails) {
                     ivPoster.loadTmdbImageLowQuality(profilePath)
-//                    ivPosterBackdrop.loadTmdbImageOriginalQuality(poster)
+                    ivPosterBackdrop.loadTmdbImageOriginalQuality(profilePath)
                     tvMovieTitle.text = name
                     tvDescription.text = biography
 //                    tvRating.text = rating.toString()

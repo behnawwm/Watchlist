@@ -14,5 +14,5 @@ data class MovieEntity(
 ) {
 
     fun toMovieView() =
-        MovieView(id, GeneralConstants.TMDB_IMAGE_PREFIX + posterPath, title, rating,true)
+        MovieView(id, posterPath, title, rating,true)
 }

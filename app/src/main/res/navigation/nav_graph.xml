@@ -2,76 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/movieListFragment">
+    app:startDestination="@id/nav_list">
 
-    <fragment
-        android:id="@+id/movieListFragment"
-        android:name="ir.behnawwm.watchlist.features.presentation.main.movie_list.MovieListFragment"
-        android:label="MovieListFragment"
-        tools:layout="@layout/fragment_movie_list">
-        <action
-            android:id="@+id/action_movieListFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment" />
-
-    </fragment>
-    <fragment
-        android:id="@+id/movieDetailsFragment"
-        android:name="ir.behnawwm.watchlist.features.presentation.main.movie_details.MovieDetailsFragment"
-        android:label="MovieDetailsFragment"
-        tools:layout="@layout/fragment_movie_details_old">
-
-        <argument
-            android:name="selectedMovieId"
-            android:defaultValue="0"
-            app:argType="integer" />
-        <argument
-            android:name="isSaved"
-            app:argType="boolean"
-            android:defaultValue="false" />
-        <action
-            android:id="@+id/action_movieDetailsFragment_to_personDetailsFragment"
-            app:destination="@id/personDetailsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/savedFragment"
-        android:name="ir.behnawwm.watchlist.features.presentation.main.saved.SavedFragment"
-        android:label="SavedFragment"
-        tools:layout="@layout/fragment_saved">
-        <action
-            android:id="@+id/action_savedFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="ir.behnawwm.watchlist.features.presentation.main.search.SearchFragment"
-        android:label="SearchFragment"
-        tools:layout="@layout/fragment_search" >
-        <action
-            android:id="@+id/action_searchFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment" />
-    </fragment>
-    <action
-        android:id="@+id/action_global_savedFragment"
-        app:destination="@id/savedFragment" />
-    <action
-        android:id="@+id/action_global_searchFragment"
-        app:destination="@id/searchFragment" />
-    <action
-        android:id="@+id/action_global_movieListFragment"
-        app:destination="@id/movieListFragment" />
-    <fragment
-        android:id="@+id/personDetailsFragment"
-        android:name="ir.behnawwm.watchlist.features.presentation.main.person_details.PersonDetailsFragment"
-        android:label="PersonDetailsFragment"
-        tools:layout="@layout/fragment_person_details">
-        <argument
-            android:name="selectedMovieId"
-            app:argType="integer" />
-    </fragment>
-
+    <include app:graph="@navigation/nav_list" />
+    <include app:graph="@navigation/nav_saved" />
+    <include app:graph="@navigation/nav_search" />
 </navigation>
