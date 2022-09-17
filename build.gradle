@@ -3,7 +3,11 @@ buildscript {
     ext {
         kotlin_version = '1.5.10'
         navigation_version = '2.3.5'
-        hilt_version = '2.28.3-alpha'
+        compose_version = '1.3.0-beta02'
+        hiltComposeNavigation = '1.0.0'
+        hiltVersion = '2.43.2'
+        roomVersion = '2.4.3'
+        coroutinesVersion = '1.6.4'
     }
     repositories {
         maven { url 'https://jitpack.io' }
