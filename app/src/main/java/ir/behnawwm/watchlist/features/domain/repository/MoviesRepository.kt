@@ -25,6 +25,8 @@ interface MoviesRepository {
     fun topRatedMovies(): Either<Failure, TmdbPageResult<TmdbMovie>>
     fun searchMovie(query: String): Either<Failure, TmdbPageResult<TmdbMovie>>
 
+    fun moviesByGenre(genreId: Int): Either<Failure, TmdbPageResult<TmdbMovie>>
+
     suspend fun insertSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None>
     suspend fun deleteSavedMovie(movie: MovieEntity): Either<Failure, UseCase.None>
     suspend fun savedMovies(): Either<Failure, List<MovieEntity>>
@@ -96,6 +98,17 @@ interface MoviesRepository {
             return when (networkHandler.isNetworkAvailable()) {
                 true -> request(
                     service.searchMovie(GeneralConstants.TMDB_TOKEN, query),
+                    { it },
+                    TmdbPageResult.empty
+                )
+                false -> Either.Left(Failure.NetworkConnection)
+            }
+        }
+
+        override fun moviesByGenre(genreId: Int): Either<Failure, TmdbPageResult<TmdbMovie>> {
+            return when (networkHandler.isNetworkAvailable()) {
+                true -> request(
+                    service.moviesByGenre(GeneralConstants.TMDB_TOKEN, genreId),
                     { it },
                     TmdbPageResult.empty
                 )
