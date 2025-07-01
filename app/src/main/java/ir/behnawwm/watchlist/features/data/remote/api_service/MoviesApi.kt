@@ -43,4 +43,10 @@ internal interface MoviesApi {
         @Query("api_key") token: String,
         @Query("query") query: String
     ): Call<TmdbPageResult<TmdbMovie>>
+
+    @GET("3/discover/movie")
+    fun moviesByGenre(
+        @Query("api_key") token: String,
+        @Query("with_genres") genreId: Int
+    ): Call<TmdbPageResult<TmdbMovie>>
 }

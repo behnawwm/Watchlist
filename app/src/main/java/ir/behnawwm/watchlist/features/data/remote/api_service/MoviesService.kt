@@ -25,4 +25,6 @@ class MoviesService
     override fun popularMovies(token: String) = moviesApi.popularMovies(token)
 
     override fun topRatedMovies(token: String) = moviesApi.topRatedMovies(token)
+
+    override fun moviesByGenre(token: String, genreId: Int) = moviesApi.moviesByGenre(token, genreId)
 }

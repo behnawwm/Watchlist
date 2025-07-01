@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_movieDetailsFragment_to_personDetailsFragment"
             app:destination="@id/personDetailsFragment" />
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_genreMoviesFragment"
+            app:destination="@id/genreMoviesFragment" />
     </fragment>
     <fragment
         android:id="@+id/personDetailsFragment"
@@ -39,6 +42,22 @@
         android:label="SavedFragment" >
         <action
             android:id="@+id/action_savedFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/genreMoviesFragment"
+        android:name="ir.behnawwm.watchlist.features.presentation.main.genre_movies.GenreMoviesFragment"
+        tools:layout="@layout/fragment_genre_movies"
+        android:label="GenreMoviesFragment">
+        <argument
+            android:name="genreId"
+            app:argType="integer" />
+        <argument
+            android:name="genreName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_genreMoviesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
     </fragment>
 </navigation>

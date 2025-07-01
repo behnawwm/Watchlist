@@ -97,7 +97,12 @@ class MovieDetailsFragment : Fragment() {
             genresAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
             adapter = genresAdapter
             genresAdapter.onClickListener = { view, adapter, item, position ->
-                //todo navigate to movies with selected genre
+                val direction =
+                    MovieDetailsFragmentDirections.actionMovieDetailsFragmentToGenreMoviesFragment(
+                        item.genre.id,
+                        item.genre.name.orEmpty()
+                    )
+                findNavController().navigate(direction)
                 true
             }
         }
